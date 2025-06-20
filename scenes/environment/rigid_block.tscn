@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfoi4lqm3tml0"]
+
+[ext_resource type="Script" uid="uid://cf00eccwjrvsv" path="res://scripts/environment/rigid/rigid_block.gd" id="1_oyhe2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m21qr"]
+size = Vector2(30, 28)
+
+[sub_resource type="Gradient" id="Gradient_rp718"]
+offsets = PackedFloat32Array(0.0060241, 1)
+colors = PackedColorArray(0.352941, 0.192157, 0.0980392, 1, 0.352941, 0.192157, 0.0980392, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_oyhe2"]
+gradient = SubResource("Gradient_rp718")
+
+[node name="RigidBlock" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 39
+script = ExtResource("1_oyhe2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m21qr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.078125, 20)
+texture = SubResource("GradientTexture1D_oyhe2")

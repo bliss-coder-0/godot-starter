@@ -54,6 +54,8 @@ allow_y_controls = true
 gravity_percent = 0.0
 weapon_primary = NodePath("WeaponPrimary")
 weapon_secondary = NodePath("WeaponSecondary")
+garbage = null
+garbage_time = null
 aim_sprite = NodePath("Crosshairs")
 touch_sprite = NodePath("TouchCircle")
 

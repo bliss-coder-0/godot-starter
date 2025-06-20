@@ -67,9 +67,12 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var body = collision.get_collider()
-		#if body is CharacterBody2D:
-			#if body != null:
-				#body.take_damage(damage)
+		
+		if body is CharacterController:
+			body.take_damage(damage)
+				
+		if body is StaticBlock:
+			body.take_damage(damage)
 
 		if collide_effect != null:
 			var collide_position = collision.get_position()

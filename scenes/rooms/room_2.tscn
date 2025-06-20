@@ -46,6 +46,10 @@ texture = SubResource("GradientTexture1D_6761a")
 
 [node name="Player" parent="." instance=ExtResource("1_ra442")]
 position = Vector2(151, 78)
+knockback_force = null
+knockback_resistance = null
+garbage = null
+garbage_time = null
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

@@ -53,6 +53,8 @@ func pc_controls():
 @export var friction: float = 30.0
 @export var push_force: float = 300.0
 @export var dash_force: float = 600.0
+@export var knockback_force: float = 200.0
+@export var knockback_resistance: float = 0.5
 
 @export_group("Modifiers")
 @export var movement_percent: float = 1.0
@@ -72,6 +74,10 @@ func pc_controls():
 @export_group("Armor")
 @export var ap: int = 100
 @export var max_ap: int = 100
+
+@export_group("Garbage")
+@export var garbage: bool = false
+@export var garbage_time: float = 0.0
 
 @export_group("Debug")
 @export var aim_sprite: Sprite2D
@@ -93,9 +99,15 @@ var last_pressed_movement: String = ""
 
 var paralyzed: bool = false
 
+signal spawned(pos: Vector2)
+signal died(pos: Vector2)
+signal hp_changed(hp_change: int, max_hp: int)
+signal ap_changed(ap_change: int, max_ap: int)
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	hide()
 	if touch_sprite != null:
 		touch_sprite.hide()
 	double_tap_timer = Timer.new()
@@ -353,10 +365,6 @@ func _attack_secondary():
 		return
 	if weapon_secondary != null:
 		weapon_secondary.attack(get_aim_direction())
-
-func spawn(pos: Vector2 = position):
-	position = pos
-	paralyzed = false
 	
 func spawn_restore():
 	velocity.x = 0
@@ -376,6 +384,44 @@ func spawn_random_from_nav():
 func paralyze():
 	paralyzed = true
 	velocity = Vector2.ZERO
+
+func spawn(spawn_position: Vector2 = Vector2.ZERO):
+	position = spawn_position
+	velocity = Vector2.ZERO
+	paralyzed = false
+	hp = max_hp
+	ap = max_ap
+	show()
+	spawned.emit(global_position)
+	hp_changed.emit(hp, max_hp)
+	ap_changed.emit(ap, max_ap)
+
+func die():
+	paralyzed = true
+	if garbage:
+		await get_tree().create_timer(garbage_time).timeout
+		call_deferred("queue_free")
+	else:
+		await get_tree().create_timer(garbage_time).timeout
+		hide()
+	died.emit(global_position)
+
+func take_damage(amount: int):
+	if ap > 0:
+		ap -= amount
+		ap_changed.emit(ap, max_ap)
+		return
+	
+	hp -= amount
+
+	# Check for death
+	if hp <= 0:
+		hp_changed.emit(hp, max_hp)
+		die()
+		return
+	
+	# Emit current health
+	hp_changed.emit(hp, max_hp)
 
 func save():
 	var data = {

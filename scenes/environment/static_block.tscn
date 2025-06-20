@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3nptyryw5y67"]
+[gd_scene load_steps=5 format=3 uid="uid://d3nptyryw5y67"]
+
+[ext_resource type="Script" uid="uid://b38w6rrr4c742" path="res://scripts/environment/static/static_block.gd" id="1_eoo0a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d67j2"]
 
-[sub_resource type="Gradient" id="Gradient_rp718"]
+[sub_resource type="Gradient" id="Gradient_eoo0a"]
 offsets = PackedFloat32Array(0.0060241, 1)
 colors = PackedColorArray(0.352941, 0.192157, 0.0980392, 1, 0.352941, 0.192157, 0.0980392, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_eoo0a"]
-gradient = SubResource("Gradient_rp718")
+gradient = SubResource("Gradient_eoo0a")
 
 [node name="StaticBlock" type="StaticBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 39
+script = ExtResource("1_eoo0a")
+hp = 1
+max_hp = 1
+ap = 1
+max_ap = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d67j2")
