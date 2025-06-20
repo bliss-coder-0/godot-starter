@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6k6l0trlmmpl"
+path="res://.godot/imported/City Lights.mp3-eb7d0871a7673855236078b1f2ec4694.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/songs/City Lights.mp3"
+dest_files=["res://.godot/imported/City Lights.mp3-eb7d0871a7673855236078b1f2ec4694.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://dik1803o7impn"]
+
+[ext_resource type="Script" uid="uid://bonl7xjvm12no" path="res://scripts/weapons/projectile.gd" id="1_sa081"]
+[ext_resource type="PackedScene" uid="uid://cbv7i0avt2fgg" path="res://scenes/effects/collisions/missle_damage.tscn" id="2_0233o"]
+[ext_resource type="Texture2D" uid="uid://de7arqhrkx10b" path="res://assets/img/bullet.png" id="3_mryth"]
+[ext_resource type="AudioStream" uid="uid://c8etdjtxg34n" path="res://assets/audio/Missle.wav" id="4_0233o"]
+[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/LightMask.png" id="5_0233o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwlv"]
+size = Vector2(12, 6)
+
+[node name="ProjectileMissle" type="StaticBody2D" node_paths=PackedStringArray("audio")]
+collision_layer = 32
+collision_mask = 6
+script = ExtResource("1_sa081")
+collide_effect = ExtResource("2_0233o")
+audio = NodePath("AudioStreamPlayer2D")
+metadata/_custom_type_script = "uid://bonl7xjvm12no"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wnwlv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_mryth")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0233o")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.223529, 1)
+energy = 10.0
+texture = ExtResource("5_0233o")
+texture_scale = 1.5

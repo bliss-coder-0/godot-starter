@@ -1,0 +1,36 @@
+class_name ScreenShake extends Node2D
+
+@export var shake_fade: float = 5.0
+@export var noise_shake_speed: float = 10.0
+@export var camera: Camera2D
+
+var shake_strength: float = 0.0
+
+var rand = RandomNumberGenerator.new()
+var noise: FastNoiseLite = FastNoiseLite.new()
+var noise_i: float = 0.0
+
+func _ready():
+	rand.randomize()
+	noise.seed = rand.randi()
+	noise.frequency = 1.0
+	noise.fractal_octaves = 1
+	noise.fractal_gain = 10
+	noise.fractal_lacunarity = 20.0
+	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+	
+func apply_shake(amount: float):
+	shake_strength = amount
+
+func _process(delta: float) -> void:
+	if camera != null:
+		if shake_strength > 0.0:
+			shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
+			camera.offset = _get_random_noise(delta)
+
+func _get_random_noise(delta: float):
+	noise_i += delta * noise_shake_speed
+	return Vector2(
+		noise.get_noise_2d(1, noise_i) * shake_strength,
+		noise.get_noise_2d(100, noise_i) * shake_strength
+	)

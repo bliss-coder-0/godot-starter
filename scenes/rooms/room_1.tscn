@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://c3dr0kc5tmi6a"]
+
+[ext_resource type="PackedScene" uid="uid://bfsgckpckosf" path="res://scenes/characters/player.tscn" id="1_6iamk"]
+[ext_resource type="Script" uid="uid://dny8opyadgvey" path="res://scripts/scene/room.gd" id="1_wodat"]
+[ext_resource type="PackedScene" uid="uid://d3nptyryw5y67" path="res://scenes/environment/static_block.tscn" id="2_nsrm0"]
+[ext_resource type="Script" uid="uid://b6ihhlmdxxix6" path="res://scripts/effects/camera/screen_shake/screen_shake.gd" id="3_nsrm0"]
+[ext_resource type="Script" uid="uid://diqrbhfl35phw" path="res://scripts/areas/room_door.gd" id="5_p8nu4"]
+[ext_resource type="Script" uid="uid://y2k6svdyl4md" path="res://scripts/spawning/spawn_position.gd" id="6_v1x83"]
+[ext_resource type="PackedScene" uid="uid://dgq6syw2qe32p" path="res://scenes/ui/menus/pause_menu.tscn" id="7_aq8op"]
+
+[sub_resource type="Gradient" id="Gradient_x42e6"]
+colors = PackedColorArray(0, 0.0676861, 1.20327e-08, 1, 0, 0.0666667, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6761a"]
+gradient = SubResource("Gradient_x42e6")
+
+[sub_resource type="Environment" id="Environment_6761a"]
+background_mode = 3
+glow_bloom = 0.15
+glow_blend_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1x83"]
+radius = 13.3417
+
+[sub_resource type="Gradient" id="Gradient_v1x83"]
+offsets = PackedFloat32Array(0, 0.993976)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1x83"]
+gradient = SubResource("Gradient_v1x83")
+
+[node name="Room" type="Node2D" node_paths=PackedStringArray("camera", "player")]
+script = ExtResource("1_wodat")
+camera = NodePath("Camera2D")
+player = NodePath("Player")
+spawn_at_first_door = true
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(320, 180)
+repeat_times = 12
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(161.5, 92.5625)
+scale = Vector2(1.26172, 184.875)
+texture = SubResource("GradientTexture1D_6761a")
+
+[node name="Player" parent="." instance=ExtResource("1_6iamk")]
+position = Vector2(151, 78)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="StaticBlock" parent="." instance=ExtResource("2_nsrm0")]
+position = Vector2(67, 61)
+
+[node name="StaticBlock2" parent="." instance=ExtResource("2_nsrm0")]
+position = Vector2(11, 161)
+
+[node name="StaticBlock3" parent="." instance=ExtResource("2_nsrm0")]
+position = Vector2(234, 156)
+
+[node name="StaticBlock4" parent="." instance=ExtResource("2_nsrm0")]
+position = Vector2(303, 23)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(151, 78)
+position_smoothing_enabled = true
+
+[node name="ScreenShake" type="Node2D" parent="." node_paths=PackedStringArray("camera") groups=["screen_shake"]]
+script = ExtResource("3_nsrm0")
+camera = NodePath("../Camera2D")
+metadata/_custom_type_script = "uid://b6ihhlmdxxix6"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6761a")
+
+[node name="RoomDoor" type="Area2D" parent="." node_paths=PackedStringArray("spawn_position")]
+position = Vector2(396, 115)
+script = ExtResource("5_p8nu4")
+door_id = "1"
+goto_door_id = "1"
+scene_path = "res://scenes/rooms/room_2.tscn"
+spawn_position = NodePath("SpawnPosition")
+metadata/_custom_type_script = "uid://diqrbhfl35phw"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDoor"]
+shape = SubResource("CircleShape2D_v1x83")
+
+[node name="Sprite2D" type="Sprite2D" parent="RoomDoor"]
+position = Vector2(-1.01328e-05, 0.999995)
+scale = Vector2(0.140625, 36)
+texture = SubResource("GradientTexture1D_v1x83")
+
+[node name="SpawnPosition" type="Node2D" parent="RoomDoor"]
+position = Vector2(-54, -25)
+script = ExtResource("6_v1x83")
+metadata/_custom_type_script = "uid://y2k6svdyl4md"
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_aq8op")]
