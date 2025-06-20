@@ -25,7 +25,7 @@ jobs:
           archive_output: true
           use_preset_export_path: true
           export_debug: false
-          presets_to_export: win,linux,linux-arm,web
+          presets_to_export: win,linux,web
 
       - name: Upload web build to itch
         uses: KikimoraGames/itch-publish@v0.0.3
@@ -50,15 +50,6 @@ jobs:
         with:
           butlerApiKey: ${{ secrets.BUTLER_KEY }}
           gameData: ./build/linux/linux.zip
-          itchUsername: ${{ secrets.ITCH_USER_NAME }}
-          itchGameId: ${{ secrets.ITCH_GAME_ID }}
-          buildChannel: linux
-
-      - name: Upload linux arm build to itch
-        uses: KikimoraGames/itch-publish@v0.0.3
-        with:
-          butlerApiKey: ${{ secrets.BUTLER_KEY }}
-          gameData: ./build/linux-arm/linux-arm.zip
           itchUsername: ${{ secrets.ITCH_USER_NAME }}
           itchGameId: ${{ secrets.ITCH_GAME_ID }}
           buildChannel: linux
