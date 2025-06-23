@@ -1,6 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bfsgckpckosf"]
+[gd_scene load_steps=24 format=3 uid="uid://bfsgckpckosf"]
 
 [ext_resource type="Script" uid="uid://cyhaw1qyjtrhn" path="res://scripts/characters/character_controller.gd" id="1_rp718"]
+[ext_resource type="Script" uid="uid://d2lsy2pdynjo3" path="res://scripts/characters/player_controls.gd" id="2_g66nw"]
+[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://scripts/characters/character_sheet.gd" id="2_rpnd8"]
 [ext_resource type="Texture2D" uid="uid://iy021d8gnrks" path="res://assets/img/crosshairs.png" id="3_qgnko"]
 [ext_resource type="Texture2D" uid="uid://bxqd1qybg36cl" path="res://assets/img/circle.png" id="4_7vyk4"]
 [ext_resource type="Script" uid="uid://bl2gqgh8sr6i1" path="res://scripts/state_machine/state_machine.gd" id="4_atpat"]
@@ -15,6 +17,35 @@
 [ext_resource type="Texture2D" uid="uid://yfinwvdrgjhy" path="res://assets/img/red-arrow.png" id="9_qgnko"]
 [ext_resource type="PackedScene" uid="uid://dik1803o7impn" path="res://scenes/weapons/projectiles/projectile_missle.tscn" id="10_xrqxk"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="11_2l4js"]
+
+[sub_resource type="Resource" id="Resource_rpnd8"]
+script = ExtResource("2_rpnd8")
+character_name = ""
+character_type = 0
+race = 3
+class_type = 4
+alignment = 0.0
+level = 0
+health = 0
+max_health = 0
+armor = 0
+max_armor = 0
+magic = 0
+max_magic = 0
+stamina = 0
+max_stamina = 0
+special = 0
+max_special = 0
+xp = 0
+max_xp = 0
+strength = 0
+dexterity = 0
+constitution = 0
+intelligence = 0
+wisdom = 0
+charisma = 0
+attack = 0
+metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wocps"]
 
@@ -42,22 +73,25 @@ max_ammo = 0
 unlimited_ammo = true
 metadata/_custom_type_script = "uid://c2hg8y2fqffme"
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon_primary", "weapon_secondary", "aim_sprite", "touch_sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controls")]
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_rp718")
-movement_type = 2
-aim_type = 1
-facing_type = 1
-attack_type = 1
+character_sheet = SubResource("Resource_rpnd8")
+controls = NodePath("PlayerControls")
 allow_y_controls = true
-gravity_percent = 0.0
-weapon_primary = NodePath("WeaponPrimary")
-weapon_secondary = NodePath("WeaponSecondary")
-garbage = null
-garbage_time = null
-aim_sprite = NodePath("Crosshairs")
-touch_sprite = NodePath("TouchCircle")
+
+[node name="PlayerControls" type="Node" parent="." node_paths=PackedStringArray("weapon_primary", "weapon_secondary", "aim_sprite", "touch_sprite")]
+script = ExtResource("2_g66nw")
+movement_type = 4
+aim_type = 4
+facing_type = 4
+attack_type = 4
+weapon_primary = NodePath("../WeaponPrimary")
+weapon_secondary = NodePath("../WeaponSecondary")
+aim_sprite = NodePath("../Crosshairs")
+touch_sprite = NodePath("../TouchCircle")
+metadata/_custom_type_script = "uid://d2lsy2pdynjo3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wocps")
@@ -104,7 +138,7 @@ script = ExtResource("7_k4v7y")
 ranged_weapon = SubResource("Resource_wqk1x")
 metadata/_custom_type_script = "uid://c83fdq88jwyeg"
 
-[node name="DebugLabel" type="Label" parent="."]
+[node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("controls")]
 offset_left = -10.0
 offset_top = -42.0
 offset_right = 30.0
@@ -114,6 +148,7 @@ theme_override_font_sizes/font_size = 16
 text = "State
 Position"
 script = ExtResource("8_eojnx")
+controls = NodePath("../PlayerControls")
 
 [node name="DirectionArrow" type="TextureRect" parent="."]
 offset_left = 23.0

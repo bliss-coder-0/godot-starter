@@ -104,3 +104,18 @@ func toggle():
 func _on_finished():
 	if is_repeating:
 		play_next()
+		
+func _on_button_next_pressed() -> void:
+	play_next()
+	#current_track_label.text = get_current_track_name()
+
+func _on_button_prev_pressed() -> void:
+	play_previous()
+	#current_track_label.text = get_current_track_name()
+
+func _on_button_toggle_pressed() -> void:
+	toggle()
+	#if is_playing:
+		#play_button.text = "||"
+	#else:
+		#play_button.text = ">"

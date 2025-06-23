@@ -1,13 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgq6syw2qe32p"]
+[gd_scene load_steps=18 format=3 uid="uid://dgq6syw2qe32p"]
 
 [ext_resource type="Script" uid="uid://bxu41q8tb6kv5" path="res://scenes/ui/menus/pause_menu.gd" id="1_a3xc8"]
 [ext_resource type="Script" uid="uid://cg8iv8veotlm8" path="res://scripts/menus/menu_stack.gd" id="2_sn3bg"]
 [ext_resource type="Script" uid="uid://cfidra8l63jcf" path="res://scripts/menus/menu.gd" id="3_rdfhy"]
 [ext_resource type="Texture2D" uid="uid://df4rjm03pymov" path="res://assets/img/hamburger-menu.png" id="4_sn3bg"]
 [ext_resource type="PackedScene" uid="uid://c40xhlbq0xxj2" path="res://scenes/ui/volume_slider/volume_slider.tscn" id="4_srbt0"]
+[ext_resource type="Script" uid="uid://kfj666n2xifd" path="res://scripts/menus/menu_stack_button.gd" id="5_rdfhy"]
 [ext_resource type="AudioStream" uid="uid://da5oygxus6g8a" path="res://assets/audio/click.mp3" id="5_xiye5"]
+[ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://scripts/menus/menu_back_button.gd" id="6_srbt0"]
 [ext_resource type="AudioStream" uid="uid://d024mg5knpil1" path="res://assets/audio/wind-swipe.mp3" id="6_tt2gu"]
 [ext_resource type="AudioStream" uid="uid://bko8nhioem3o2" path="res://assets/audio/wind-swipe-away.mp3" id="7_3kafx"]
+[ext_resource type="Script" uid="uid://dn07iyn4dq4i4" path="res://scripts/menus/menu_quit_button.gd" id="7_xiye5"]
 
 [sub_resource type="Animation" id="Animation_hibng"]
 length = 0.001
@@ -257,13 +260,11 @@ _data = {
 &"transition_out": SubResource("Animation_nd50l")
 }
 
-[node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("menu_stack", "audio_click", "play_button", "current_track_label")]
+[node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("menu_stack", "audio_click")]
 process_mode = 3
 script = ExtResource("1_a3xc8")
 menu_stack = NodePath("MenuStack")
 audio_click = NodePath("AudioClick")
-play_button = NodePath("MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonToggle")
-current_track_label = NodePath("MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/LabelCurrentTrack")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 50
@@ -308,9 +309,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -64.5
-offset_top = -67.0
+offset_top = -46.5
 offset_right = 64.5
-offset_bottom = 67.0
+offset_bottom = 46.5
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -333,36 +334,50 @@ layout_mode = 2
 layout_mode = 2
 text = "Paused"
 
-[node name="LabelCurrentTrack" type="Label" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Current Track:"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ButtonPrev" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ControlsButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu", "audio_click")]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "<<"
+text = "Controls"
+script = ExtResource("5_rdfhy")
+menu_stack = NodePath("../../../../../../..")
+to_menu = NodePath("../../../../../../../ControlsMenu")
+audio_click = NodePath("../../../../../../../../AudioClick")
+metadata/_custom_type_script = "uid://kfj666n2xifd"
 
-[node name="ButtonToggle" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AudioButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu", "audio_click")]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "||"
+text = "Audio"
+script = ExtResource("5_rdfhy")
+menu_stack = NodePath("../../../../../../..")
+to_menu = NodePath("../../../../../../../AudioMenu")
+audio_click = NodePath("../../../../../../../../AudioClick")
+metadata/_custom_type_script = "uid://kfj666n2xifd"
 
-[node name="ButtonNext" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("menu_stack", "audio_click")]
 layout_mode = 2
 size_flags_horizontal = 3
-text = ">>"
+text = "Back"
+script = ExtResource("6_srbt0")
+menu_stack = NodePath("../../../../../../..")
+audio_click = NodePath("../../../../../../../../AudioClick")
+metadata/_custom_type_script = "uid://jnyn4yy8houc"
 
-[node name="ButtonAudio" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "Audio Settings"
-
-[node name="ButtonBack" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Back
-"
+size_flags_horizontal = 3
+text = "Quit"
+script = ExtResource("7_xiye5")
+metadata/_custom_type_script = "uid://dn07iyn4dq4i4"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuStack/PauseMenu"]
 libraries = {
@@ -453,6 +468,146 @@ libraries = {
 &"": SubResource("AnimationLibrary_hibng")
 }
 
+[node name="SoundtrackMenu" type="CanvasLayer" parent="MenuStack"]
+visible = false
+script = ExtResource("3_rdfhy")
+metadata/_custom_type_script = "uid://cfidra8l63jcf"
+
+[node name="Control" type="Control" parent="MenuStack/SoundtrackMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MenuStack/SoundtrackMenu/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -67.0
+offset_right = 64.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuStack/SoundtrackMenu/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+
+[node name="LabelCurrentTrack" type="Label" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Current Track:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonPrev" type="Button" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "<<"
+
+[node name="ButtonToggle" type="Button" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "||"
+
+[node name="ButtonNext" type="Button" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ">>"
+
+[node name="ButtonAudio" type="Button" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Audio Settings"
+
+[node name="ButtonBack" type="Button" parent="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back
+"
+
+[node name="ControlsMenu" type="CanvasLayer" parent="MenuStack"]
+script = ExtResource("3_rdfhy")
+metadata/_custom_type_script = "uid://cfidra8l63jcf"
+
+[node name="Control" type="Control" parent="MenuStack/ControlsMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MenuStack/ControlsMenu/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -46.5
+offset_right = 64.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuStack/ControlsMenu/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("menu_stack", "audio_click")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back"
+script = ExtResource("6_srbt0")
+menu_stack = NodePath("../../../../../../..")
+audio_click = NodePath("../../../../../../../../AudioClick")
+metadata/_custom_type_script = "uid://jnyn4yy8houc"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuStack/ControlsMenu"]
+libraries = {
+&"": SubResource("AnimationLibrary_hibng")
+}
+
 [node name="AudioClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_xiye5")
 bus = &"Effects"
@@ -466,9 +621,9 @@ stream = ExtResource("7_3kafx")
 bus = &"Effects"
 
 [connection signal="pressed" from="CanvasLayer/PauseTextureButton" to="." method="_on_pause_texture_button_pressed"]
-[connection signal="pressed" from="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonPrev" to="." method="_on_button_prev_pressed"]
-[connection signal="pressed" from="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonToggle" to="." method="_on_button_toggle_pressed"]
-[connection signal="pressed" from="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonNext" to="." method="_on_button_next_pressed"]
-[connection signal="pressed" from="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/ButtonAudio" to="." method="_on_button_audio_pressed"]
-[connection signal="pressed" from="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]
 [connection signal="pressed" from="MenuStack/AudioMenu/Control/Panel/MarginContainer/VBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="pressed" from="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonPrev" to="." method="_on_button_prev_pressed"]
+[connection signal="pressed" from="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonToggle" to="." method="_on_button_toggle_pressed"]
+[connection signal="pressed" from="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonNext" to="." method="_on_button_next_pressed"]
+[connection signal="pressed" from="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/ButtonAudio" to="." method="_on_button_audio_pressed"]
+[connection signal="pressed" from="MenuStack/SoundtrackMenu/Control/Panel/MarginContainer/VBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]

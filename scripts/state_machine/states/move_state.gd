@@ -9,8 +9,8 @@ func _move(delta: float):
 	_apply_gravity(delta)
 	_apply_controls(delta)
 		
-	parent.velocity.y = clamp(parent.velocity.y, -parent.max_velocity.y, parent.max_velocity.y)
-	parent.velocity.x = clamp(parent.velocity.x, -parent.max_velocity.x, parent.max_velocity.x)
+	parent.velocity.y = clamp(parent.velocity.y, -PhysicsManager.max_velocity.y, PhysicsManager.max_velocity.y)
+	parent.velocity.x = clamp(parent.velocity.x, -PhysicsManager.max_velocity.x, PhysicsManager.max_velocity.x)
 	
 	var has_collisions = parent.move_and_slide()
 
@@ -46,22 +46,22 @@ func _resolve_collision(collision):
 	parent.global_position += move_amount + (travel * 0.1) # Adjust the factor as needed
 
 func _apply_gravity(delta: float):
-	parent.velocity += (parent.get_gravity() * parent.gravity_percent) * delta
+	parent.velocity += (parent.get_gravity() * PhysicsManager.gravity_percent) * delta
 			
 func _apply_controls(_delta: float):
 	if parent.paralyzed:
 		return
-	if parent.is_walking():
+	if parent.controls.is_walking():
 		parent.speed = parent.walk_speed
-	elif parent.is_running():
+	elif parent.controls.is_running():
 		parent.speed = parent.run_speed
 		
-	var direction = parent.get_movement_direction()
+	var direction = parent.controls.get_movement_direction()
 	
 	if direction != Vector2.ZERO:
-		parent.velocity = parent.velocity.move_toward(direction * parent.speed * parent.movement_percent, parent.acceleration)
+		parent.velocity = parent.velocity.move_toward(direction * parent.speed * parent.movement_percent, PhysicsManager.acceleration)
 	else:
-		parent.velocity = parent.velocity.move_toward(Vector2.ZERO, parent.friction)
+		parent.velocity = parent.velocity.move_toward(Vector2.ZERO, PhysicsManager.friction)
 
 func _apply_knockback(rigid_body: RigidBlock, collision: KinematicCollision2D):
 	# Check if the rigid block should apply knockback
@@ -76,7 +76,7 @@ func _apply_knockback(rigid_body: RigidBlock, collision: KinematicCollision2D):
 	var knockback_force = knockback_direction * knockback_strength
 	
 	# Apply resistance to reduce knockback effect
-	knockback_force *= parent.knockback_resistance
+	knockback_force *= PhysicsManager.knockback_resistance
 	
 	# Apply the knockback to the player's velocity
 	parent.velocity += knockback_force

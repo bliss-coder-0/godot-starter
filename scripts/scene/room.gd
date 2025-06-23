@@ -35,7 +35,7 @@ func _ready() -> void:
 func _spawn_npc_characters():
 	for c in get_children():
 		if c is CharacterController:
-			if c.character_type == CharacterController.CharacterType.NPC:
+			if c.character_sheet.character_type == CharacterSheet.CharacterControllerType.NPC:
 				c.spawn_random()
 
 func _has_loaded():

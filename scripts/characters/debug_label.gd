@@ -1,5 +1,7 @@
 extends Label
 
+@export var controls : PlayerControls
+
 var parent
 
 var state_name
@@ -20,8 +22,8 @@ func _on_state_change(new_state, _prev_state):
 	_update_label()
 
 func _update_label():
-	var movement_direction = parent.get_movement_direction()
-	var aim_direction = parent.get_aim_direction()
+	var movement_direction = controls.get_movement_direction()
+	var aim_direction = controls.get_aim_direction()
 	text = "%s\n%s\n%s\n%s" % [state_name, parent_position, movement_direction, aim_direction]
 
 func _update_parent_position():

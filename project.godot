@@ -13,6 +13,8 @@ config_version=5
 config/name="Godot Starter"
 run/main_scene="uid://b67fmj68dwgra"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://5yytbw2yrv5q"
 config/icon="uid://cy6uvrtu635v"
 config/windows_native_icon="res://assets/img/icon-1024.ico"
 
@@ -27,6 +29,7 @@ GameManager="*res://scripts/game/game_manager.gd"
 SceneManager="*res://scenes/scene_manager/scene_manager.tscn"
 SaveGameManager="*res://scripts/save_games/save_game_manager.gd"
 SoundtrackPlayer="*res://scripts/audio/soundtrack_player.tscn"
+PhysicsManager="*res://scripts/physics/physics_manager.gd"
 
 [display]
 
