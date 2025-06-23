@@ -12,7 +12,7 @@ https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_android.ht
 keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity 10000
 ```
 
-### Copy Loading Brand To Assetss
+### Copy Loading Brand To Assets
 
 ```
 cp "/mnt/d/Bliss Code/Marketing/Marketing/0-shield.png" "./assets/img/"
