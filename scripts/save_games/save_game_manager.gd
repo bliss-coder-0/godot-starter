@@ -93,7 +93,7 @@ func reset():
 func save_persisting_nodes(index):
 	var path = str("user://save_persisting_nodes_", index, ".dat")
 	var file = FileAccess.open(path, FileAccess.WRITE)
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	var save_nodes = get_tree().get_nodes_in_group("persist")
 	for node in save_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():

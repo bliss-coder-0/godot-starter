@@ -28,15 +28,15 @@ func _ready() -> void:
 		if current_room_door:
 			current_room_door.spawn_player(player)
 
-		_spawn_npc_characters()
+		#_spawn_npc_characters()
 		
 	call_deferred("_has_loaded")
 
-func _spawn_npc_characters():
-	for c in get_children():
-		if c is CharacterController:
-			if c.character_sheet.character_type == CharacterSheet.CharacterControllerType.NPC:
-				c.spawn_random()
+#func _spawn_npc_characters():
+	#for c in get_children():
+		#if c is CharacterController:
+			#if c.character_sheet.character_type == CharacterSheet.CharacterControllerType.NPC:
+				#c.spawn_random()
 
 func _has_loaded():
 	camera.enabled = true

@@ -35,7 +35,7 @@ func _ready():
 		var rand_level = randf_range(min_audio_level, max_audio_level)
 		audio.volume_db = rand_level
 		audio.play()
-	if animation_player != null:
+	if animation_player != null and animation_player.has_animation(animation_name):
 		animation_player.play(animation_name)
 	if follow_group_name:
 		var targets = get_tree().get_nodes_in_group(follow_group_name)
@@ -52,7 +52,7 @@ func _ready():
 	time_elapsed = time_to_live
 		
 func _physics_process(delta):
-	#_apply_gravity(delta)
+	_apply_gravity(delta)
 		
 	if target != null and target.is_inside_tree():
 		var direction = target.global_position - global_position
@@ -71,8 +71,9 @@ func _physics_process(delta):
 		if body is CharacterController:
 			body.take_damage(damage)
 				
-		if body is StaticBlock:
-			body.take_damage(damage)
+		var body_parent = body.get_parent()
+		if body_parent is Entity:
+			body_parent.take_damage(damage)
 
 		if collide_effect != null:
 			var collide_position = collision.get_position()

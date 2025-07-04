@@ -1,0 +1,74 @@
+{
+  "spriteSheet": {
+    "id": "potions",
+    "name": "Potions",
+    "atlas": {
+      "path": "res://assets/img/potions.png",
+      "cell_size": 16,
+      "hframes": 3,
+      "vframes": 2
+    }
+  },
+  "items": [
+    {
+      "id": "0",
+      "frame": 0,
+      "category": ["consumable", "potion"],
+      "itemType": "health",
+      "variant": "low",
+      "color": "red",
+      "health": 25,
+      "consume_on_pickup": true
+    },
+    {
+      "id": "1",
+      "frame": 1,
+      "category": ["consumable", "potion"],
+      "itemType": "health",
+      "variant": "medium",
+      "color": "red",
+      "health": 50,
+      "consume_on_pickup": true
+    },
+    {
+      "id": "2",
+      "frame": 2,
+      "category": ["consumable", "potion"],
+      "itemType": "health",
+      "variant": "high",
+      "color": "red",
+      "health": 100,
+      "consume_on_pickup": true
+    },
+    {
+      "id": "3",
+      "frame": 3,
+      "category": ["consumable", "potion"],
+      "itemType": "mana",
+      "variant": "low",
+      "color": "blue",
+      "mana": 25,
+      "consume_on_pickup": true
+    },
+    {
+      "id": "4",
+      "frame": 4,
+      "category": ["consumable", "potion"],
+      "itemType": "mana",
+      "variant": "medium",
+      "color": "blue",
+      "mana": 50,
+      "consume_on_pickup": true
+    },
+    {
+      "id": "5",
+      "frame": 5,
+      "category": ["consumable", "potion"],
+      "itemType": "mana",
+      "variant": "high",
+      "color": "blue",
+      "mana": 100,
+      "consume_on_pickup": true
+    }
+  ]
+}

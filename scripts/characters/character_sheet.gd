@@ -5,20 +5,21 @@ enum CharacterRace {Dwarf, Elf, Halfling, Human, Dragonborn, Gnome, HalfElf, Hal
 enum CharacterClassType {Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin, Ranger, Rogue, Sorcerer, Warlock, Wizard}
 
 @export var character_name: String = ""
-@export var character_type: CharacterControllerType = CharacterControllerType.PLAYER
+@export var character_controller_type: CharacterControllerType = CharacterControllerType.PLAYER
+
+@export_group("Type")
 @export var race: CharacterRace = CharacterRace.Human
 @export var class_type: CharacterClassType = CharacterClassType.Fighter
 @export_range(-1.0, 1.0) var alignment: float = 0.0
 
-@export var level: int = 0
-
 @export_group("Points")
+@export var level: int = 0
 @export var health: int = 0
 @export var max_health: int = 0
 @export var armor: int = 0
 @export var max_armor: int = 0
-@export var magic: int = 0
-@export var max_magic: int = 0
+@export var mana: int = 0
+@export var max_mana: int = 0
 @export var stamina: int = 0
 @export var max_stamina: int = 0
 @export var special: int = 0
@@ -37,7 +38,7 @@ enum CharacterClassType {Barbarian, Bard, Cleric, Druid, Fighter, Monk, Paladin,
 
 signal health_changed(health_change: int, max_health: int)
 signal armor_changed(armor_change: int, max_armor: int)
-signal magic_changed(magic_change: int, max_magic: int)
+signal mana_changed(mana_change: int, max_mana: int)
 signal stamina_changed(stamina_change: int, max_stamina: int)
 signal special_changed(special_change: int, max_special: int)
 signal alignment_changed(alignment: float)
@@ -46,8 +47,8 @@ func reset():
 	level = 0
 	health = 0
 	max_health = 0
-	magic = 0
-	max_magic = 0
+	mana = 0
+	max_mana = 0
 	stamina = 0
 	max_stamina = 0
 	special = 0
@@ -61,7 +62,7 @@ func reset():
 	attack = 0
 	health_changed.emit(health, max_health)
 	armor_changed.emit(armor, max_armor)
-	magic_changed.emit(magic, max_magic)
+	mana_changed.emit(mana, max_mana)
 	stamina_changed.emit(stamina, max_stamina)
 	special_changed.emit(special, max_special)
 
@@ -124,9 +125,9 @@ func set_armor(value: int):
 	armor = clamp(value, 0, max_armor)
 	armor_changed.emit(armor, max_armor)
 
-func set_magic(value: int):
-	magic = clamp(value, 0, max_magic)
-	magic_changed.emit(magic, max_magic)
+func set_mana(value: int):
+	mana = clamp(value, 0, max_mana)
+	mana_changed.emit(mana, max_mana)
 
 func set_stamina(value: int):
 	stamina = clamp(value, 0, max_stamina)
@@ -136,10 +137,34 @@ func set_special(value: int):
 	special = clamp(value, 0, max_special)
 	special_changed.emit(special, max_special)
 
+func add_health(value: int):
+	set_health(health + value)
+
+func add_mana(value: int):
+	set_mana(mana + value)
+
+func add_stamina(value: int):
+	set_stamina(stamina + value)
+
+func add_xp(value: int):
+	xp += value
+	if xp >= max_xp:
+		level += 1
+		xp = 0
+		max_xp = 100
+		health_changed.emit(health, max_health)
+
+func add_level(value: int):
+	level += value
+	health_changed.emit(health, max_health)
+	mana_changed.emit(mana, max_mana)
+	stamina_changed.emit(stamina, max_stamina)
+	special_changed.emit(special, max_special)
+
 func save():
 	var data = {
 		"character_name": character_name,
-		"character_type": character_type,
+		"character_controller_type": character_controller_type,
 		"race": race,
 		"class_type": class_type,
 		"level": level,
@@ -154,8 +179,8 @@ func save():
 		"max_health": max_health,
 		"armor": armor,
 		"max_armor": max_armor,
-		"magic": magic,
-		"max_magic": max_magic,
+		"mana": mana,
+		"max_mana": max_mana,
 		"stamina": stamina,
 		"max_stamina": max_stamina,
 		"special": special,
@@ -167,8 +192,8 @@ func save():
 func restore(data):
 	if data.has("character_name"):
 		character_name = data.get("character_name")
-	if data.has("character_type"):
-		character_type = data.get("character_type")
+	if data.has("character_controller_type"):
+		character_controller_type = data.get("character_controller_type")
 	if data.has("race"):
 		race = data.get("race")
 	if data.has("class_type"):
@@ -197,10 +222,10 @@ func restore(data):
 		armor = data.get("armor")
 	if data.has("max_armor"):
 		max_armor = data.get("max_armor")
-	if data.has("magic"):
-		magic = data.get("magic")
-	if data.has("max_magic"):
-		max_magic = data.get("max_magic")
+	if data.has("mana"):
+		mana = data.get("mana")
+	if data.has("max_mana"):
+		max_mana = data.get("max_mana")
 	if data.has("stamina"):
 		stamina = data.get("stamina")
 	if data.has("max_stamina"):

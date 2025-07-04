@@ -6,7 +6,7 @@ var dash_time_elapsed: float = 0
 
 func enter() -> void:
 	dash_time_elapsed = 0
-	super()
+	super ()
 	_apply_dash()
 	
 func process_frame(delta: float) -> void:
@@ -14,10 +14,7 @@ func process_frame(delta: float) -> void:
 	if dash_time_elapsed <= 0:
 		state_machine.dispatch("dash_finished")
 
-func process_physics(delta: float) -> void:
-	pass
-
 func _apply_dash():
 	dash_time_elapsed = dash_time
-	var direction = parent.get_movement_direction()
-	parent.velocity += direction * parent.dash_force * parent.movement_percent
+	var direction = parent.controls.get_movement_direction()
+	parent.velocity += direction * PhysicsManager.dash_force * parent.movement_percent

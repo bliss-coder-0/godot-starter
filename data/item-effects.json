@@ -1,0 +1,54 @@
+[
+  {
+    "id": "fire",
+    "name": "Fire"
+  },
+  {
+    "id": "ice",
+    "name": "Ice"
+  },
+  {
+    "id": "poison",
+    "name": "Poison"
+  },
+  {
+    "id": "lightning",
+    "name": "Lightning"
+  },
+  {
+    "id": "health-regen",
+    "name": "Health Regen"
+  },
+  {
+    "id": "mana-regen",
+    "name": "Mana Regen"
+  },
+  {
+    "id": "critical-strike",
+    "name": "Critical Strike"
+  },
+  {
+    "id": "speed",
+    "name": "Speed"
+  },
+  {
+    "id": "strength",
+    "name": "Strength"
+  },
+  {
+    "id": "agility",
+    "name": "Agility"
+  },
+  {
+    "id": "intelligence",
+    "name": "Intelligence"
+  },
+  {
+    "id": "wisdom",
+    "name": "Wisdom"
+  },
+  {
+    "id": "luck",
+    "name": "Luck"
+  }
+]

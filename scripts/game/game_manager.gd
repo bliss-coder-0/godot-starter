@@ -1,5 +1,8 @@
 extends Node
 
+var cursor_texture: Texture2D
+var cursor_texture_hover: Texture2D
+
 var game_data: GameData = GameData.new()
 
 var save_file_path = "user://save"
@@ -10,6 +13,9 @@ signal paused
 signal unpaused
 
 func _ready():
+	cursor_texture = load("res://assets/img/crosshairs.png")
+	cursor_texture_hover = load("res://assets/img/circle.png")
+	set_cursor_default()
 	call_deferred("_load")
 	
 func _load():
@@ -49,3 +55,9 @@ func quit():
 func restart():
 	game_data.reset()
 	get_tree().reload_current_scene()
+	
+func set_cursor_default():
+	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
+	
+func set_cursor_hover():
+	Input.set_custom_mouse_cursor(cursor_texture_hover, Input.CURSOR_ARROW, Vector2(16, 16))

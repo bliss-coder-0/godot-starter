@@ -1,0 +1,173 @@
+[gd_scene load_steps=27 format=3 uid="uid://c7vk5ufpp0ijb"]
+
+[ext_resource type="Script" uid="uid://cyhaw1qyjtrhn" path="res://scripts/characters/character_controller.gd" id="1_ceaqc"]
+[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://scripts/characters/character_sheet.gd" id="2_bgitj"]
+[ext_resource type="Script" uid="uid://oia3ewk3bbkl" path="res://scripts/characters/character_controls.gd" id="3_01k3j"]
+[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://scripts/items/inventory.gd" id="3_37v42"]
+[ext_resource type="Script" uid="uid://bl2gqgh8sr6i1" path="res://scripts/state_machine/state_machine.gd" id="4_urpkq"]
+[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://scripts/items/equipment.gd" id="4_y5h15"]
+[ext_resource type="Script" uid="uid://d3mhvrwvo3puh" path="res://scripts/state_machine/states/idle_state.gd" id="5_urmqq"]
+[ext_resource type="Script" uid="uid://c83fdq88jwyeg" path="res://scripts/weapons/ranged_weapon_base.gd" id="6_feloy"]
+[ext_resource type="Script" uid="uid://b3mlg2cpf7tdl" path="res://scripts/behavior_tree/bt_player.gd" id="6_thqvo"]
+[ext_resource type="Script" uid="uid://dnm2cmvm2uh0v" path="res://scripts/behavior_tree/composite/bt_selector_node.gd" id="7_brs55"]
+[ext_resource type="Script" uid="uid://xwbo18yggp15" path="res://scripts/behavior_tree/composite/bt_sequence_node.gd" id="8_cr2nu"]
+[ext_resource type="Script" uid="uid://bnbbi7tcoi6sg" path="res://scripts/behavior_tree/bt_blackboard.gd" id="8_y5h15"]
+[ext_resource type="PackedScene" uid="uid://qduhqb6f8ovy" path="res://scenes/characters/character_points_bar.tscn" id="9_8t0fs"]
+[ext_resource type="Script" uid="uid://bh7876rmafrqg" path="res://scripts/behavior_tree/action/bt_move_to_position.gd" id="10_8t0fs"]
+[ext_resource type="Script" uid="uid://vlpod7ytrh8m" path="res://scripts/behavior_tree/action/bt_choose_random_screen_pos.gd" id="12_y5h15"]
+[ext_resource type="Script" uid="uid://dok7jnwk51yxt" path="res://scripts/behavior_tree/decorator/bt_inverter.gd" id="13_b0l76"]
+[ext_resource type="Script" uid="uid://suq305es6w0d" path="res://scripts/behavior_tree/condition/bt_has_target.gd" id="14_mm6pg"]
+[ext_resource type="Script" uid="uid://c6qalyn18c5cy" path="res://scripts/behavior_tree/action/bt_attack.gd" id="17_ffg3s"]
+[ext_resource type="Script" uid="uid://ddbwnppuvd6sh" path="res://scripts/areas/target_area.gd" id="19_b0l76"]
+
+[sub_resource type="Resource" id="Resource_urpkq"]
+script = ExtResource("2_bgitj")
+character_name = "Npc 1"
+character_controller_type = 1
+race = 3
+class_type = 4
+alignment = 0.0
+level = 0
+health = 10
+max_health = 10
+armor = 0
+max_armor = 0
+mana = 0
+max_mana = 0
+stamina = 0
+max_stamina = 0
+special = 0
+max_special = 0
+xp = 0
+max_xp = 0
+strength = 0
+dexterity = 0
+constitution = 0
+intelligence = 0
+wisdom = 0
+charisma = 0
+attack = 0
+metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
+
+[sub_resource type="Resource" id="Resource_wwum6"]
+script = ExtResource("3_37v42")
+gold = 0
+max_gold = 10000
+max_slots = 50
+metadata/_custom_type_script = "uid://ej3t1d08m43w"
+
+[sub_resource type="Resource" id="Resource_lwmd7"]
+script = ExtResource("4_y5h15")
+metadata/_custom_type_script = "uid://cwaaqivnrog6d"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84hc2"]
+
+[sub_resource type="Gradient" id="Gradient_rp718"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bgitj"]
+gradient = SubResource("Gradient_rp718")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mm6pg"]
+radius = 156.0
+
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("controls") groups=["npc"]]
+collision_layer = 2
+collision_mask = 103
+motion_mode = 1
+script = ExtResource("1_ceaqc")
+character_sheet = SubResource("Resource_urpkq")
+inventory = SubResource("Resource_wwum6")
+equipment = SubResource("Resource_lwmd7")
+controls = NodePath("CharacterControls")
+allow_y_controls = true
+garbage = true
+metadata/_custom_type_script = "uid://cyhaw1qyjtrhn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_84hc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.078125, 20)
+texture = SubResource("GradientTexture1D_bgitj")
+
+[node name="CharacterControls" type="Node" parent="."]
+script = ExtResource("3_01k3j")
+metadata/_custom_type_script = "uid://oia3ewk3bbkl"
+
+[node name="WeaponPrimary" type="Node2D" parent="."]
+position = Vector2(11, 0)
+script = ExtResource("6_feloy")
+item_id = "guns_3"
+metadata/_custom_type_script = "uid://c83fdq88jwyeg"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_urpkq")
+initial_state = NodePath("IdleState")
+metadata/_custom_type_script = "uid://bl2gqgh8sr6i1"
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("5_urmqq")
+metadata/_custom_type_script = "uid://d3mhvrwvo3puh"
+
+[node name="BTBlackboard" type="Node" parent="."]
+script = ExtResource("8_y5h15")
+metadata/_custom_type_script = "uid://bnbbi7tcoi6sg"
+
+[node name="BTPlayer" type="Node" parent="." node_paths=PackedStringArray("root_node", "blackboard", "agent")]
+script = ExtResource("6_thqvo")
+root_node = NodePath("BTSelectorNode")
+blackboard = NodePath("../BTBlackboard")
+agent = NodePath("..")
+is_running = true
+metadata/_custom_type_script = "uid://b3mlg2cpf7tdl"
+
+[node name="BTSelectorNode" type="Node" parent="BTPlayer"]
+script = ExtResource("7_brs55")
+metadata/_custom_type_script = "uid://dnm2cmvm2uh0v"
+
+[node name="Wander" type="Node" parent="BTPlayer/BTSelectorNode"]
+script = ExtResource("8_cr2nu")
+metadata/_custom_type_script = "uid://xwbo18yggp15"
+
+[node name="BTInverter" type="Node" parent="BTPlayer/BTSelectorNode/Wander"]
+script = ExtResource("13_b0l76")
+metadata/_custom_type_script = "uid://dok7jnwk51yxt"
+
+[node name="BTHasTarget" type="Node" parent="BTPlayer/BTSelectorNode/Wander/BTInverter"]
+script = ExtResource("14_mm6pg")
+metadata/_custom_type_script = "uid://suq305es6w0d"
+
+[node name="BTChooseRandomScreenPos" type="Node" parent="BTPlayer/BTSelectorNode/Wander"]
+script = ExtResource("12_y5h15")
+metadata/_custom_type_script = "uid://vlpod7ytrh8m"
+
+[node name="BTMoveToPosition" type="Node" parent="BTPlayer/BTSelectorNode/Wander"]
+script = ExtResource("10_8t0fs")
+metadata/_custom_type_script = "uid://bh7876rmafrqg"
+
+[node name="Attack" type="Node" parent="BTPlayer/BTSelectorNode"]
+script = ExtResource("8_cr2nu")
+metadata/_custom_type_script = "uid://xwbo18yggp15"
+
+[node name="BTHasTarget" type="Node" parent="BTPlayer/BTSelectorNode/Attack"]
+script = ExtResource("14_mm6pg")
+metadata/_custom_type_script = "uid://suq305es6w0d"
+
+[node name="BTAttack" type="Node" parent="BTPlayer/BTSelectorNode/Attack" node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_ffg3s")
+weapon = NodePath("../../../../WeaponPrimary")
+metadata/_custom_type_script = "uid://c6qalyn18c5cy"
+
+[node name="CharacterPointsBar" parent="." instance=ExtResource("9_8t0fs")]
+
+[node name="TargetArea" type="Area2D" parent="." node_paths=PackedStringArray("blackboard")]
+collision_layer = 0
+script = ExtResource("19_b0l76")
+group = &"player"
+blackboard = NodePath("../BTBlackboard")
+metadata/_custom_type_script = "uid://ddbwnppuvd6sh"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
+shape = SubResource("CircleShape2D_mm6pg")

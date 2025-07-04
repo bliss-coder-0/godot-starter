@@ -56,3 +56,4 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_4n50p")
+bus = &"Effects"

@@ -6,12 +6,16 @@ var parent
 
 var state_name
 var parent_position
+var current_gold = 0
 
 func _ready() -> void:
 	parent = get_parent()
 	await parent.ready
 	parent.state_machine.state_changed.connect(_on_state_change)
 	state_name = parent.state_machine.current_state.name
+	if parent.inventory:
+		parent.inventory.gold_changed.connect(_on_gold_changed)
+		current_gold = parent.inventory.gold
 
 func _process(_delta: float) -> void:
 	_update_parent_position()
@@ -24,7 +28,10 @@ func _on_state_change(new_state, _prev_state):
 func _update_label():
 	var movement_direction = controls.get_movement_direction()
 	var aim_direction = controls.get_aim_direction()
-	text = "%s\n%s\n%s\n%s" % [state_name, parent_position, movement_direction, aim_direction]
+	text = "%s\n%s\n%s\n%s\n%s" % [state_name, parent_position, movement_direction, aim_direction, current_gold]
 
 func _update_parent_position():
 	parent_position = parent.global_position.round()
+	
+func _on_gold_changed(amount, _pos):
+	current_gold = amount

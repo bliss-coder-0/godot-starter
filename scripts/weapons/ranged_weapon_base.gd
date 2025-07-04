@@ -1,15 +1,33 @@
 class_name RangedWeaponBase extends Node2D
 
-@export var ranged_weapon: RangedWeapon
+@export var item_id: String
 
+var fire_rate = 0
 var fire_rate_time_elapsed: float = 0.0
 var cooldown = false
+var ammo = 10
+var max_ammo = 10
+var unlimited_ammo = false
+var projectile
 
 signal ammo_changed(ammo: int)
 
+func _ready():
+	var item = ItemCatalog.get_item(item_id)
+	if item == null:
+		print("Item not found for weapon")
+		return
+	if not item is ItemCatalog.RangedWeapon:
+		print("Item is not ranged weapon")
+		return
+	max_ammo = item.max_ammo
+	unlimited_ammo = item.unlimited_ammo
+	fire_rate = item.fire_rate
+	projectile = load(item.projectile)
+
 func _process(delta: float) -> void:
 	fire_rate_time_elapsed += delta
-	if fire_rate_time_elapsed <= ranged_weapon.fire_rate:
+	if fire_rate_time_elapsed <= fire_rate:
 		cooldown = true
 	else:
 		cooldown = false
@@ -17,19 +35,19 @@ func _process(delta: float) -> void:
 func attack(direction: Vector2):
 	if not can_attack():
 		return
-	if not ranged_weapon.unlimited_ammo:
-		ranged_weapon.ammo -= 1
+	if not unlimited_ammo:
+		ammo -= 1
 	fire_rate_time_elapsed = 0
-	var b = ranged_weapon.projectile.instantiate()
+	var b = projectile.instantiate()
 	b.start(global_position, direction)
 	get_tree().get_root().add_child(b)
-	ammo_changed.emit(ranged_weapon.ammo)
+	ammo_changed.emit(ammo)
 
 func add_ammo(amount: int):
-	ranged_weapon.ammo += amount
-	if ranged_weapon.ammo >= ranged_weapon.max_ammo:
-		ranged_weapon.ammo = ranged_weapon.max_ammo
-	ammo_changed.emit(ranged_weapon.ammo)
+	ammo += amount
+	if ammo >= max_ammo:
+		ammo = max_ammo
+	ammo_changed.emit(ammo)
 
 func can_attack():
-	return !cooldown and (ranged_weapon.unlimited_ammo or ranged_weapon.ammo > 0)
+	return !cooldown and (unlimited_ammo or ammo > 0)

@@ -1,13 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://c3dr0kc5tmi6a"]
+[gd_scene load_steps=23 format=3 uid="uid://c3dr0kc5tmi6a"]
 
 [ext_resource type="PackedScene" uid="uid://bfsgckpckosf" path="res://scenes/characters/player.tscn" id="1_6iamk"]
 [ext_resource type="Script" uid="uid://dny8opyadgvey" path="res://scripts/scene/room.gd" id="1_wodat"]
-[ext_resource type="PackedScene" uid="uid://d3nptyryw5y67" path="res://scenes/environment/static_block.tscn" id="2_nsrm0"]
 [ext_resource type="Script" uid="uid://b6ihhlmdxxix6" path="res://scripts/effects/camera/screen_shake/screen_shake.gd" id="3_nsrm0"]
-[ext_resource type="PackedScene" uid="uid://bfoi4lqm3tml0" path="res://scenes/environment/rigid_block.tscn" id="4_y5lrh"]
+[ext_resource type="Script" uid="uid://cqwk88xhb2juy" path="res://scripts/generation/room_filler.gd" id="3_ow1e4"]
+[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://scripts/characters/character_sheet.gd" id="3_wrk0s"]
+[ext_resource type="PackedScene" uid="uid://dhtvv0vpxt0sy" path="res://scenes/entities/static/static_block_entity.tscn" id="4_ow1e4"]
+[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://scripts/items/inventory.gd" id="4_rgk8g"]
+[ext_resource type="PackedScene" uid="uid://bkie0rjbgvk4u" path="res://scenes/characters/enemy.tscn" id="5_ow1e4"]
 [ext_resource type="Script" uid="uid://diqrbhfl35phw" path="res://scripts/areas/room_door.gd" id="5_p8nu4"]
+[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://scripts/items/equipment.gd" id="5_whcv4"]
 [ext_resource type="Script" uid="uid://y2k6svdyl4md" path="res://scripts/spawning/spawn_position.gd" id="6_v1x83"]
 [ext_resource type="PackedScene" uid="uid://dgq6syw2qe32p" path="res://scenes/ui/menus/pause_menu.tscn" id="7_aq8op"]
+[ext_resource type="PackedScene" uid="uid://8oqnar4uuepm" path="res://scenes/ui/hud/hud.tscn" id="13_rgk8g"]
 
 [sub_resource type="Gradient" id="Gradient_x42e6"]
 colors = PackedColorArray(0, 0.0676861, 1.20327e-08, 1, 0, 0.0666667, 0, 1)
@@ -15,9 +20,48 @@ colors = PackedColorArray(0, 0.0676861, 1.20327e-08, 1, 0, 0.0666667, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6761a"]
 gradient = SubResource("Gradient_x42e6")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y5lrh"]
-friction = 100.0
-rough = true
+[sub_resource type="Resource" id="Resource_65yxn"]
+resource_local_to_scene = true
+script = ExtResource("3_wrk0s")
+character_name = "Player"
+character_controller_type = 0
+race = 3
+class_type = 4
+alignment = 0.0
+level = 0
+health = 50
+max_health = 100
+armor = 100
+max_armor = 100
+mana = 100
+max_mana = 100
+stamina = 100
+max_stamina = 100
+special = 100
+max_special = 100
+xp = 0
+max_xp = 0
+strength = 0
+dexterity = 0
+constitution = 0
+intelligence = 0
+wisdom = 0
+charisma = 0
+attack = 0
+metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
+
+[sub_resource type="Resource" id="Resource_lyd6t"]
+resource_local_to_scene = true
+script = ExtResource("4_rgk8g")
+gold = 0
+max_gold = 10000
+max_slots = 50
+metadata/_custom_type_script = "uid://ej3t1d08m43w"
+
+[sub_resource type="Resource" id="Resource_li2v6"]
+resource_local_to_scene = true
+script = ExtResource("5_whcv4")
+metadata/_custom_type_script = "uid://cwaaqivnrog6d"
 
 [sub_resource type="Environment" id="Environment_6761a"]
 background_mode = 3
@@ -51,39 +95,20 @@ texture = SubResource("GradientTexture1D_6761a")
 
 [node name="Player" parent="." instance=ExtResource("1_6iamk")]
 position = Vector2(151, 78)
+character_sheet = SubResource("Resource_65yxn")
+inventory = SubResource("Resource_lyd6t")
+equipment = SubResource("Resource_li2v6")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Evironment" type="Node2D" parent="."]
-
-[node name="StaticBlock" parent="Evironment" instance=ExtResource("2_nsrm0")]
-position = Vector2(67, 61)
-
-[node name="StaticBlock2" parent="Evironment" instance=ExtResource("2_nsrm0")]
-position = Vector2(11, 161)
-
-[node name="StaticBlock3" parent="Evironment" instance=ExtResource("2_nsrm0")]
-position = Vector2(234, 156)
-
-[node name="StaticBlock4" parent="Evironment" instance=ExtResource("2_nsrm0")]
-position = Vector2(303, 23)
-
-[node name="RigidBlock" parent="Evironment" instance=ExtResource("4_y5lrh")]
-position = Vector2(187, -17)
-physics_material_override = SubResource("PhysicsMaterial_y5lrh")
-gravity_scale = 0.0
-lock_rotation = true
-linear_damp = 1.0
-knockback_multiplier = 5.0
-
-[node name="RigidBlock2" parent="Evironment" instance=ExtResource("4_y5lrh")]
-position = Vector2(66, -17)
-physics_material_override = SubResource("PhysicsMaterial_y5lrh")
-gravity_scale = 0.0
-lock_rotation = true
-linear_damp = 1.0
-knockback_multiplier = 0.0
+[node name="Environment" type="Node2D" parent="."]
+position = Vector2(-111, -11)
+script = ExtResource("3_ow1e4")
+temperature_scenes = Array[PackedScene]([ExtResource("4_ow1e4")])
+moisture_scenes = Array[PackedScene]([ExtResource("5_ow1e4")])
+temperature_threshold = -0.3
+moisture_threshold = -0.55
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(151, 78)
@@ -120,3 +145,6 @@ script = ExtResource("6_v1x83")
 metadata/_custom_type_script = "uid://y2k6svdyl4md"
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_aq8op")]
+
+[node name="Hud" parent="." node_paths=PackedStringArray("room_filler") instance=ExtResource("13_rgk8g")]
+room_filler = NodePath("../Environment")

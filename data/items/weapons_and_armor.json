@@ -1,0 +1,141 @@
+{
+  "spriteSheet": {
+    "id": "weapons_and_armor",
+    "name": "Weapons and Armor",
+    "atlas": {
+      "path": "res://assets/img/WeaponsAndArmor.png",
+      "cell_size": 16,
+      "hframes": 4,
+      "vframes": 4
+    }
+  },
+  "items": [
+    {
+      "id": "0",
+      "frame": 0,
+      "category": ["equipable", "weapon", "melee"],
+      "itemType": "sword",
+      "variant": "long",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "1",
+      "frame": 1,
+      "category": ["equipable", "weapon", "melee"],
+      "itemType": "axe",
+      "variant": "axe",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "2",
+      "frame": 2,
+      "category": ["equipable", "weapon", "melee"],
+      "itemType": "mace",
+      "variant": "mace",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "3",
+      "frame": 3,
+      "category": ["equipable", "weapon", "melee"],
+      "itemType": "sword",
+      "variant": "short",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "4",
+      "frame": 4,
+      "category": ["equipable", "weapon", "ranged"],
+      "itemType": "bow",
+      "variant": "short",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "5",
+      "frame": 5,
+      "category": ["equipable", "weapon", "ranged"],
+      "itemType": "wand",
+      "variant": "wand",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "6",
+      "frame": 6,
+      "category": ["equipable", "armor"],
+      "itemType": "shield",
+      "variant": "small",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "7",
+      "frame": 7,
+      "category": ["equipable", "armor"],
+      "itemType": "shield",
+      "variant": "large",
+      "slot": ["left_hand", "right_hand"]
+    },
+    {
+      "id": "8",
+      "frame": 8,
+      "category": ["equipable", "armor"],
+      "itemType": "helmet",
+      "variant": "helmet",
+      "slot": ["head"]
+    },
+    {
+      "id": "9",
+      "frame": 9,
+      "category": ["equipable", "armor"],
+      "itemType": "amulet",
+      "variant": "amulet",
+      "slot": ["neck"]
+    },
+    {
+      "id": "10",
+      "frame": 10,
+      "category": ["equipable", "armor"],
+      "itemType": "chestplate",
+      "variant": "chestplate",
+      "slot": ["chest"]
+    },
+    {
+      "id": "11",
+      "frame": 11,
+      "category": ["equipable", "armor"],
+      "itemType": "belt",
+      "variant": "belt",
+      "slot": ["waist"]
+    },
+    {
+      "id": "12",
+      "frame": 12,
+      "category": ["equipable", "armor"],
+      "itemType": "leggings",
+      "variant": "leggings",
+      "slot": ["legs"]
+    },
+    {
+      "id": "13",
+      "frame": 13,
+      "category": ["equipable", "armor"],
+      "itemType": "boots",
+      "variant": "boots",
+      "slot": ["feet"]
+    },
+    {
+      "id": "14",
+      "frame": 14,
+      "category": ["equipable", "armor"],
+      "itemType": "gloves",
+      "variant": "gloves",
+      "slot": ["hands"]
+    },
+    {
+      "id": "15",
+      "frame": 15,
+      "category": ["equipable", "armor"],
+      "itemType": "ring",
+      "slot": ["left_finger", "right_finger"]
+    }
+  ]
+}
