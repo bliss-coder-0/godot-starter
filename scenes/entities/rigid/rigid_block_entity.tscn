@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1uon38qbt45i"]
 
-[ext_resource type="Script" uid="uid://bynqbd3uqdtnh" path="res://scripts/entities/entity.gd" id="1_cfy20"]
-[ext_resource type="Script" uid="uid://chm57l84dp8et" path="res://scripts/entities/entity_sheet.gd" id="2_nfjot"]
+[ext_resource type="Script" uid="uid://bynqbd3uqdtnh" path="res://blisscode/entities/entity.gd" id="1_cfy20"]
+[ext_resource type="Script" uid="uid://chm57l84dp8et" path="res://blisscode/entities/entity_sheet.gd" id="2_nfjot"]
 
 [sub_resource type="Resource" id="Resource_eodsa"]
 script = ExtResource("2_nfjot")

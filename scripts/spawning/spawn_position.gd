@@ -1,1 +1,0 @@
-class_name SpawnPosition extends Node2D

@@ -1,0 +1,164 @@
+[gd_scene load_steps=21 format=3 uid="uid://b6n48akbpddmx"]
+
+[ext_resource type="Script" uid="uid://bm85budamtxnd" path="res://blisscode/core/world/world.gd" id="1_3u3t0"]
+[ext_resource type="Script" uid="uid://cqwk88xhb2juy" path="res://blisscode/generation/room_filler.gd" id="2_f2vdx"]
+[ext_resource type="PackedScene" uid="uid://dhtvv0vpxt0sy" path="res://scenes/entities/static/static_block_entity.tscn" id="3_1mjyo"]
+[ext_resource type="PackedScene" uid="uid://bkie0rjbgvk4u" path="res://scenes/characters/npc/enemy.tscn" id="4_6lrsn"]
+[ext_resource type="PackedScene" uid="uid://vhowcttm2258" path="res://scenes/spawning/spawn_manager.tscn" id="5_u3pmm"]
+[ext_resource type="PackedScene" uid="uid://db1iljm7ig5j0" path="res://scenes/world/world_area/platformer/platformer.tscn" id="6_peqdm"]
+[ext_resource type="PackedScene" uid="uid://h7fl106k8gn" path="res://scenes/world/world_area/platformer/platformer_background.tscn" id="7_3u3t0"]
+[ext_resource type="PackedScene" uid="uid://d8s6nn3e758f" path="res://scenes/characters/player/player_platformer.tscn" id="7_f5bus"]
+[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://blisscode/character/character_sheet.gd" id="8_3lb3v"]
+[ext_resource type="Script" uid="uid://drotf454prdmb" path="res://blisscode/item/item.gd" id="9_k0o8k"]
+[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://blisscode/item/inventory.gd" id="10_e0lpi"]
+[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://blisscode/item/equipment.gd" id="11_eg6u2"]
+[ext_resource type="Script" uid="uid://dx15io88tra7t" path="res://blisscode/item/ranged_weapon.gd" id="13_nh5oe"]
+[ext_resource type="Texture2D" uid="uid://djiv6d5fhe0c" path="res://assets/img/items/guns.png" id="14_f417k"]
+
+[sub_resource type="Environment" id="Environment_6m72w"]
+background_mode = 3
+glow_bloom = 0.15
+glow_blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_3u3t0"]
+resource_local_to_scene = true
+script = ExtResource("8_3lb3v")
+character_name = "Player"
+character_controller_type = 0
+race = 3
+class_type = 4
+alignment = 0.0
+level = 0
+health = 50
+max_health = 100
+armor = 100
+max_armor = 100
+mana = 100
+max_mana = 100
+stamina = 100
+max_stamina = 100
+special = 100
+max_special = 100
+xp = 0
+max_xp = 0
+strength = 0
+dexterity = 0
+constitution = 0
+intelligence = 0
+wisdom = 0
+charisma = 0
+attack = 0
+metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
+
+[sub_resource type="Resource" id="Resource_f2vdx"]
+resource_local_to_scene = true
+script = ExtResource("10_e0lpi")
+gold = 0
+max_gold = 10000
+max_slots = 50
+items = Array[ExtResource("9_k0o8k")]([])
+metadata/_custom_type_script = "uid://ej3t1d08m43w"
+
+[sub_resource type="Resource" id="Resource_o6auj"]
+script = ExtResource("13_nh5oe")
+projectile = "res://scenes/weapons/projectiles/projectile.tscn"
+max_ammo = 10
+unlimited_ammo = true
+ammo = 0
+damage_min = 0
+damage_max = 0
+attack_rate = 0.1
+stamina_cost = 0.0
+weight = 0
+durability = 0
+sell_price = 0
+buy_price = 0
+rarity = 0
+level_requirement = 0
+slot = 9
+equip_on_pickup = false
+effect = Array[int]([])
+package = "guns"
+name = "black pistol"
+description = ""
+is_level_unique = false
+is_game_unique = false
+is_stackable = false
+max_stackable_count = 1
+texture = ExtResource("14_f417k")
+frame = 0
+hframes = 3
+vframes = 1
+metadata/_custom_type_script = "uid://dx15io88tra7t"
+
+[sub_resource type="Resource" id="Resource_wqk1x"]
+script = ExtResource("13_nh5oe")
+projectile = "res://scenes/weapons/projectiles/projectile_missle.tscn"
+max_ammo = 10
+unlimited_ammo = true
+ammo = 0
+damage_min = 0
+damage_max = 0
+attack_rate = 1.0
+stamina_cost = 0.0
+weight = 0
+durability = 0
+sell_price = 0
+buy_price = 0
+rarity = 0
+level_requirement = 0
+slot = 9
+equip_on_pickup = false
+effect = Array[int]([])
+package = "guns"
+name = "black missle"
+description = ""
+is_level_unique = false
+is_game_unique = false
+is_stackable = false
+max_stackable_count = 1
+texture = ExtResource("14_f417k")
+frame = 2
+hframes = 3
+vframes = 1
+metadata/_custom_type_script = "uid://dx15io88tra7t"
+
+[sub_resource type="Resource" id="Resource_1mjyo"]
+resource_local_to_scene = true
+script = ExtResource("11_eg6u2")
+left_hand = SubResource("Resource_o6auj")
+right_hand = SubResource("Resource_wqk1x")
+metadata/_custom_type_script = "uid://cwaaqivnrog6d"
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("spawn_manager")]
+script = ExtResource("1_3u3t0")
+world_name = "TopDown"
+spawn_manager = NodePath("SpawnManager")
+
+[node name="Environment" type="Node2D" parent="."]
+position = Vector2(-111, -11)
+script = ExtResource("2_f2vdx")
+temperature_scenes = Array[PackedScene]([ExtResource("3_1mjyo")])
+moisture_scenes = Array[PackedScene]([ExtResource("4_6lrsn")])
+temperature_threshold = -0.3
+moisture_threshold = -0.55
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6m72w")
+
+[node name="SpawnManager" parent="." instance=ExtResource("5_u3pmm")]
+
+[node name="WorldAreas" type="Node2D" parent="."]
+z_index = -50
+
+[node name="PlatformerBackground" parent="WorldAreas" instance=ExtResource("7_3u3t0")]
+position = Vector2(25, 135)
+
+[node name="Platformer" parent="WorldAreas" instance=ExtResource("6_peqdm")]
+position = Vector2(262, 208)
+
+[node name="PlayerPlatformer" parent="." instance=ExtResource("7_f5bus")]
+position = Vector2(269, 104)
+character_sheet = SubResource("Resource_3u3t0")
+inventory = SubResource("Resource_f2vdx")
+equipment = SubResource("Resource_1mjyo")

@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkr5b11mpccfv"]
+
+[ext_resource type="Script" uid="uid://ccnflf2vpdggk" path="res://blisscode/dialogue/dialogue_bubble.gd" id="1_7uncl"]
+
+[sub_resource type="Animation" id="Animation_lfj4e"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogueText:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_7uncl"]
+resource_name = "show_dialogue"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogueText:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ukbyq"]
+_data = {
+&"RESET": SubResource("Animation_lfj4e"),
+&"show_dialogue": SubResource("Animation_7uncl")
+}
+
+[node name="DialogueBubble" type="Node2D" node_paths=PackedStringArray("dialogue_text", "animation_player")]
+script = ExtResource("1_7uncl")
+dialogue_text = NodePath("DialogueText")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="DialogueText" type="Label" parent="."]
+offset_right = 94.0
+offset_bottom = 16.0
+theme_override_constants/line_spacing = -5
+text = "Well you go it now dont ya?"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Panel" type="Panel" parent="DialogueText"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ukbyq")
+}

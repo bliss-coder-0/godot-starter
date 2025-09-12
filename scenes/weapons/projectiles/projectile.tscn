@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dns54yr7n7ixb"]
 
-[ext_resource type="Script" uid="uid://bonl7xjvm12no" path="res://scripts/weapons/projectile.gd" id="1_krgla"]
-[ext_resource type="Texture2D" uid="uid://de7arqhrkx10b" path="res://assets/img/bullet.png" id="2_bvfrx"]
+[ext_resource type="Script" uid="uid://bonl7xjvm12no" path="res://blisscode/weapons/projectile.gd" id="1_krgla"]
+[ext_resource type="Texture2D" uid="uid://de7arqhrkx10b" path="res://assets/img/weapons/projectiles/bullet.png" id="2_bvfrx"]
 [ext_resource type="PackedScene" uid="uid://dfdamqkrq06bk" path="res://scenes/effects/collisions/bullet_damage.tscn" id="2_wnwlv"]
-[ext_resource type="AudioStream" uid="uid://cwfhpji1ljpte" path="res://assets/audio/Machine Gun.wav" id="3_bvfrx"]
-[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/LightMask.png" id="5_xsg6a"]
+[ext_resource type="AudioStream" uid="uid://cwfhpji1ljpte" path="res://assets/audio/effects/Machine Gun.wav" id="3_bvfrx"]
+[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/masks/LightMask.png" id="5_xsg6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwlv"]
 size = Vector2(4, 2)
@@ -28,7 +28,7 @@ stream = ExtResource("3_bvfrx")
 bus = &"Effects"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 5.0
+energy = 0.5
 texture = ExtResource("5_xsg6a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

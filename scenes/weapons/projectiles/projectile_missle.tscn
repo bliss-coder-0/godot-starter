@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dik1803o7impn"]
 
-[ext_resource type="Script" uid="uid://bonl7xjvm12no" path="res://scripts/weapons/projectile.gd" id="1_sa081"]
+[ext_resource type="Script" uid="uid://bonl7xjvm12no" path="res://blisscode/weapons/projectile.gd" id="1_sa081"]
 [ext_resource type="PackedScene" uid="uid://cbv7i0avt2fgg" path="res://scenes/effects/collisions/missle_damage.tscn" id="2_0233o"]
-[ext_resource type="Texture2D" uid="uid://de7arqhrkx10b" path="res://assets/img/bullet.png" id="3_mryth"]
-[ext_resource type="AudioStream" uid="uid://c8etdjtxg34n" path="res://assets/audio/Missle.wav" id="4_0233o"]
-[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/LightMask.png" id="5_0233o"]
+[ext_resource type="Texture2D" uid="uid://de7arqhrkx10b" path="res://assets/img/weapons/projectiles/bullet.png" id="3_mryth"]
+[ext_resource type="AudioStream" uid="uid://c8etdjtxg34n" path="res://assets/audio/effects/Missle.wav" id="4_0233o"]
+[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/masks/LightMask.png" id="5_0233o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wnwlv"]
 size = Vector2(12, 6)

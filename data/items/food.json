@@ -1,9 +1,8 @@
 {
   "spriteSheet": {
-    "id": "fruit_and_vegetable",
     "name": "Fruit and Vegetable",
     "atlas": {
-      "path": "res://assets/img/FruitAndVegetable.png",
+      "path": "res://assets/img/items/FruitAndVegetable.png",
       "cell_size": 16,
       "hframes": 8,
       "vframes": 5
@@ -11,305 +10,204 @@
   },
   "items": [
     {
-      "id": "0",
       "frame": 0,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "apple",
-      "color": "red"
+      "type": "consumable",
+      "name": "red apple"
     },
     {
-      "id": "1",
       "frame": 1,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "orange"
+      "type": "consumable",
+      "name": "orange"
     },
     {
-      "id": "2",
       "frame": 2,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "banana"
+      "type": "consumable",
+      "name": "banana"
     },
     {
-      "id": "3",
       "frame": 3,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "cherry"
+      "type": "consumable",
+      "name": "cherry"
     },
     {
-      "id": "4",
       "frame": 4,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "lemon",
-      "color": "yellow"
+      "type": "consumable",
+      "name": "yellow lemon"
     },
     {
-      "id": "5",
       "frame": 5,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "grape",
-      "color": "purple"
+      "type": "consumable",
+      "name": "purple grape"
     },
     {
-      "id": "6",
       "frame": 6,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "strawberry",
-      "color": "red"
+      "type": "consumable",
+      "name": "red strawberry"
     },
     {
-      "id": "7",
       "frame": 7,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "watermelon"
+      "type": "consumable",
+      "name": "watermelon"
     },
     {
-      "id": "8",
       "frame": 8,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "apple",
-      "color": "green"
+      "type": "consumable",
+      "name": "green apple"
     },
     {
-      "id": "9",
       "frame": 9,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "orange",
-      "color": "yellow"
+      "type": "consumable",
+      "name": "orange"
     },
     {
-      "id": "10",
       "frame": 10,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "kiwi"
+      "type": "consumable",
+      "name": "kiwi"
     },
     {
-      "id": "11",
       "frame": 11,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "avocado"
+      "type": "consumable",
+      "name": "avocado"
     },
     {
-      "id": "12",
       "frame": 12,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "lemon",
-      "color": "green"
+      "type": "consumable",
+      "name": "green lemon"
     },
     {
-      "id": "13",
       "frame": 13,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "grape",
-      "color": "green"
+      "type": "consumable",
+      "name": "green grape"
     },
     {
-      "id": "14",
       "frame": 14,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "strawberry",
-      "color": "green"
+      "type": "consumable",
+      "name": "green strawberry"
     },
     {
-      "id": "15",
       "frame": 15,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "watermelon"
+      "type": "consumable",
+      "name": "watermelon"
     },
     {
-      "id": "16",
       "frame": 16,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "pineapple"
+      "type": "consumable",
+      "name": "pineapple"
     },
     {
-      "id": "17",
       "frame": 17,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "grapefruit"
+      "type": "consumable",
+      "name": "grapefruit"
     },
     {
-      "id": "18",
       "frame": 18,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "pear",
-      "color": "green"
+      "type": "consumable",
+      "name": "green pear"
     },
     {
-      "id": "19",
       "frame": 19,
-      "category": ["consumable", "food"],
-      "itemType": "fruit",
-      "variant": "pear"
+      "type": "consumable",
+      "name": "pear"
     },
     {
-      "id": "20",
       "frame": 20,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "onion",
-      "color": "white"
+      "type": "consumable",
+      "name": "white onion"
     },
     {
-      "id": "21",
       "frame": 21,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "eggplant"
+      "type": "consumable",
+      "name": "eggplant"
     },
     {
-      "id": "22",
       "frame": 22,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "bell pepper",
-      "color": "green"
+      "type": "consumable",
+      "name": "green bell pepper"
     },
     {
-      "id": "23",
       "frame": 23,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "pepper",
-      "color": "green"
+      "type": "consumable",
+      "name": "green pepper"
     },
     {
-      "id": "24",
       "frame": 24,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "tomato"
+      "type": "consumable",
+      "name": "tomato"
     },
     {
-      "id": "25",
       "frame": 25,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "potato"
+      "type": "consumable",
+      "name": "potato"
     },
     {
-      "id": "26",
       "frame": 26,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "carrot"
+      "type": "consumable",
+      "name": "carrot"
     },
     {
-      "id": "27",
       "frame": 27,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "garlic"
+      "type": "consumable",
+      "name": "garlic"
     },
     {
-      "id": "28",
       "frame": 28,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "onion",
-      "color": "yellow"
+      "type": "consumable",
+      "name": "yellow onion"
     },
     {
-      "id": "29",
       "frame": 29,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "leek"
+      "type": "consumable",
+      "name": "leek"
     },
     {
-      "id": "30",
       "frame": 30,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "bell pepper",
-      "color": "red"
+      "type": "consumable",
+      "name": "red bell pepper"
     },
     {
-      "id": "31",
       "frame": 31,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "pepper",
-      "color": "red"
+      "type": "consumable",
+      "name": "red pepper"
     },
     {
-      "id": "32",
       "frame": 32,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "tomato",
-      "color": "green"
+      "type": "consumable",
+      "name": "green tomato"
     },
     {
-      "id": "33",
       "frame": 33,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "pumpkin"
+      "type": "consumable",
+      "name": "pumpkin"
     },
     {
-      "id": "34",
       "frame": 34,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "pumpkin",
-      "color": "green"
+      "type": "consumable",
+      "name": "green pumpkin"
     },
     {
-      "id": "35",
       "frame": 35,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "onion",
-      "color": "purple"
+      "type": "consumable",
+      "name": "purple onion"
     },
     {
-      "id": "36",
       "frame": 36,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "mushroom"
+      "type": "consumable",
+      "name": "mushroom"
     },
     {
-      "id": "37",
       "frame": 37,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "lettuce"
+      "type": "consumable",
+      "name": "lettuce"
     },
     {
-      "id": "38",
       "frame": 38,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "bell pepper",
-      "color": "yellow"
+      "type": "consumable",
+      "name": "yellow bell pepper"
     },
     {
-      "id": "39",
       "frame": 39,
-      "category": ["consumable", "food"],
-      "itemType": "vegetable",
-      "variant": "pepper",
-      "color": "yellow"
+      "type": "consumable",
+      "name": "yellow pepper"
     }
   ]
 }

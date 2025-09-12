@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dhtvv0vpxt0sy"]
 
-[ext_resource type="Script" uid="uid://bynqbd3uqdtnh" path="res://scripts/entities/entity.gd" id="1_084w8"]
-[ext_resource type="Script" uid="uid://chm57l84dp8et" path="res://scripts/entities/entity_sheet.gd" id="2_7scik"]
+[ext_resource type="Script" uid="uid://bynqbd3uqdtnh" path="res://blisscode/entities/entity.gd" id="1_084w8"]
+[ext_resource type="Script" uid="uid://chm57l84dp8et" path="res://blisscode/entities/entity_sheet.gd" id="2_7scik"]
 [ext_resource type="PackedScene" uid="uid://c3sn1lvnaw1tp" path="res://scenes/items/pickups/pickup.tscn" id="3_7scik"]
 
 [sub_resource type="Resource" id="Resource_wxne5"]

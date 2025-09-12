@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyd1wnj2k44f"]
+
+[ext_resource type="Script" uid="uid://ccr0m6myikthw" path="res://blisscode/ui/audio/jukebox/song_container.gd" id="1_gubc3"]
+[ext_resource type="Texture2D" uid="uid://bucrtj6i7n6up" path="res://assets/img/ui/audio/AudioControls_Play.png" id="1_u5twc"]
+[ext_resource type="Texture2D" uid="uid://c3uiwx4887mwy" path="res://assets/img/ui/audio/AudioControls_Pause.png" id="3_4phuv"]
+
+[node name="SongContainer" type="HBoxContainer" node_paths=PackedStringArray("play_button", "pause_button", "track_name")]
+alignment = 1
+script = ExtResource("1_gubc3")
+play_button = NodePath("PlayButton")
+pause_button = NodePath("PauseButton")
+track_name = NodePath("TrackNameLabel")
+
+[node name="PlayButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("1_u5twc")
+
+[node name="PauseButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("3_4phuv")
+
+[node name="TrackNameLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Song 1"

@@ -1,7 +1,7 @@
 ### Convert png to ico
 
 ```
-docker run --entrypoint=magick -v ./assets/img:/imgs dpokidov/imagemagick /imgs/icon-1024.png -define icon:auto-resize=256,128,64,48,32,16 icon-1024.ico
+docker run --entrypoint=magick -v ./assets/img/icons:/imgs dpokidov/imagemagick /imgs/icons/icon-1024.png -define icon:auto-resize=256,128,64,48,32,16 icon-1024.ico
 ```
 
 ### Generate Keystore For Google Play
@@ -15,5 +15,5 @@ keytool -v -genkey -keystore mygame.keystore -alias mygame -keyalg RSA -validity
 ### Copy Loading Brand To Assets
 
 ```
-cp "/mnt/d/Bliss Code/Marketing/Marketing/0-shield.png" "./assets/img/"
+cp "/mnt/d/Bliss Code/Marketing/Marketing/0-shield.png" "./assets/img/brand/"
 ```

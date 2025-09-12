@@ -1,26 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3dr0kc5tmi6a"]
+[gd_scene load_steps=14 format=3 uid="uid://c3dr0kc5tmi6a"]
 
-[ext_resource type="PackedScene" uid="uid://bfsgckpckosf" path="res://scenes/characters/player.tscn" id="1_6iamk"]
-[ext_resource type="Script" uid="uid://dny8opyadgvey" path="res://scripts/scene/room.gd" id="1_wodat"]
-[ext_resource type="Script" uid="uid://b6ihhlmdxxix6" path="res://scripts/effects/camera/screen_shake/screen_shake.gd" id="3_nsrm0"]
-[ext_resource type="Script" uid="uid://cqwk88xhb2juy" path="res://scripts/generation/room_filler.gd" id="3_ow1e4"]
-[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://scripts/characters/character_sheet.gd" id="3_wrk0s"]
-[ext_resource type="PackedScene" uid="uid://dhtvv0vpxt0sy" path="res://scenes/entities/static/static_block_entity.tscn" id="4_ow1e4"]
-[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://scripts/items/inventory.gd" id="4_rgk8g"]
-[ext_resource type="PackedScene" uid="uid://bkie0rjbgvk4u" path="res://scenes/characters/enemy.tscn" id="5_ow1e4"]
-[ext_resource type="Script" uid="uid://diqrbhfl35phw" path="res://scripts/areas/room_door.gd" id="5_p8nu4"]
-[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://scripts/items/equipment.gd" id="5_whcv4"]
-[ext_resource type="Script" uid="uid://y2k6svdyl4md" path="res://scripts/spawning/spawn_position.gd" id="6_v1x83"]
-[ext_resource type="PackedScene" uid="uid://dgq6syw2qe32p" path="res://scenes/ui/menus/pause_menu.tscn" id="7_aq8op"]
-[ext_resource type="PackedScene" uid="uid://8oqnar4uuepm" path="res://scenes/ui/hud/hud.tscn" id="13_rgk8g"]
+[ext_resource type="PackedScene" uid="uid://bfsgckpckosf" path="res://scenes/characters/player/player.tscn" id="1_6iamk"]
+[ext_resource type="Script" uid="uid://dny8opyadgvey" path="res://blisscode/room/room.gd" id="1_wodat"]
+[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://blisscode/character/character_sheet.gd" id="3_wrk0s"]
+[ext_resource type="Script" uid="uid://drotf454prdmb" path="res://blisscode/item/item.gd" id="4_lyd6t"]
+[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://blisscode/item/inventory.gd" id="4_rgk8g"]
+[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://blisscode/item/equipment.gd" id="5_whcv4"]
+[ext_resource type="Script" uid="uid://dx15io88tra7t" path="res://blisscode/item/ranged_weapon.gd" id="6_li2v6"]
+[ext_resource type="Texture2D" uid="uid://djiv6d5fhe0c" path="res://assets/img/items/guns.png" id="7_j7np2"]
 
-[sub_resource type="Gradient" id="Gradient_x42e6"]
-colors = PackedColorArray(0, 0.0676861, 1.20327e-08, 1, 0, 0.0666667, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6761a"]
-gradient = SubResource("Gradient_x42e6")
-
-[sub_resource type="Resource" id="Resource_65yxn"]
+[sub_resource type="Resource" id="Resource_1rpy6"]
 resource_local_to_scene = true
 script = ExtResource("3_wrk0s")
 character_name = "Player"
@@ -50,101 +39,93 @@ charisma = 0
 attack = 0
 metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
 
-[sub_resource type="Resource" id="Resource_lyd6t"]
+[sub_resource type="Resource" id="Resource_omxow"]
 resource_local_to_scene = true
 script = ExtResource("4_rgk8g")
 gold = 0
 max_gold = 10000
 max_slots = 50
+items = Array[ExtResource("4_lyd6t")]([])
 metadata/_custom_type_script = "uid://ej3t1d08m43w"
 
-[sub_resource type="Resource" id="Resource_li2v6"]
+[sub_resource type="Resource" id="Resource_o6auj"]
+script = ExtResource("6_li2v6")
+projectile = "res://scenes/weapons/projectiles/projectile.tscn"
+max_ammo = 10
+unlimited_ammo = true
+ammo = 0
+damage_min = 0
+damage_max = 0
+attack_rate = 0.1
+stamina_cost = 0.0
+weight = 0
+durability = 0
+sell_price = 0
+buy_price = 0
+rarity = 0
+level_requirement = 0
+slot = 9
+equip_on_pickup = false
+effect = Array[int]([])
+package = "guns"
+name = "black pistol"
+description = ""
+is_level_unique = false
+is_game_unique = false
+is_stackable = false
+max_stackable_count = 1
+texture = ExtResource("7_j7np2")
+frame = 0
+hframes = 3
+vframes = 1
+metadata/_custom_type_script = "uid://dx15io88tra7t"
+
+[sub_resource type="Resource" id="Resource_wqk1x"]
+script = ExtResource("6_li2v6")
+projectile = "res://scenes/weapons/projectiles/projectile_missle.tscn"
+max_ammo = 10
+unlimited_ammo = true
+ammo = 0
+damage_min = 0
+damage_max = 0
+attack_rate = 1.0
+stamina_cost = 0.0
+weight = 0
+durability = 0
+sell_price = 0
+buy_price = 0
+rarity = 0
+level_requirement = 0
+slot = 9
+equip_on_pickup = false
+effect = Array[int]([])
+package = "guns"
+name = "black missle"
+description = ""
+is_level_unique = false
+is_game_unique = false
+is_stackable = false
+max_stackable_count = 1
+texture = ExtResource("7_j7np2")
+frame = 2
+hframes = 3
+vframes = 1
+metadata/_custom_type_script = "uid://dx15io88tra7t"
+
+[sub_resource type="Resource" id="Resource_40bss"]
 resource_local_to_scene = true
 script = ExtResource("5_whcv4")
+left_hand = SubResource("Resource_o6auj")
+right_hand = SubResource("Resource_wqk1x")
 metadata/_custom_type_script = "uid://cwaaqivnrog6d"
 
-[sub_resource type="Environment" id="Environment_6761a"]
-background_mode = 3
-glow_bloom = 0.15
-glow_blend_mode = 1
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_v1x83"]
-radius = 13.3417
-
-[sub_resource type="Gradient" id="Gradient_v1x83"]
-offsets = PackedFloat32Array(0, 0.993976)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1x83"]
-gradient = SubResource("Gradient_v1x83")
-
-[node name="Room" type="Node2D" node_paths=PackedStringArray("camera", "player")]
+[node name="Room" type="Node2D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_wodat")
-camera = NodePath("Camera2D")
 player = NodePath("Player")
 spawn_at_first_door = true
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(320, 180)
-repeat_times = 12
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(161.5, 92.5625)
-scale = Vector2(1.26172, 184.875)
-texture = SubResource("GradientTexture1D_6761a")
-
 [node name="Player" parent="." instance=ExtResource("1_6iamk")]
 position = Vector2(151, 78)
-character_sheet = SubResource("Resource_65yxn")
-inventory = SubResource("Resource_lyd6t")
-equipment = SubResource("Resource_li2v6")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("../../Camera2D")
-
-[node name="Environment" type="Node2D" parent="."]
-position = Vector2(-111, -11)
-script = ExtResource("3_ow1e4")
-temperature_scenes = Array[PackedScene]([ExtResource("4_ow1e4")])
-moisture_scenes = Array[PackedScene]([ExtResource("5_ow1e4")])
-temperature_threshold = -0.3
-moisture_threshold = -0.55
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(151, 78)
-position_smoothing_enabled = true
-
-[node name="ScreenShake" type="Node2D" parent="." node_paths=PackedStringArray("camera") groups=["screen_shake"]]
-script = ExtResource("3_nsrm0")
-camera = NodePath("../Camera2D")
-metadata/_custom_type_script = "uid://b6ihhlmdxxix6"
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6761a")
-
-[node name="RoomDoor" type="Area2D" parent="." node_paths=PackedStringArray("spawn_position")]
-position = Vector2(396, 115)
-script = ExtResource("5_p8nu4")
-door_id = "1"
-goto_door_id = "1"
-scene_path = "res://scenes/rooms/room_2.tscn"
-spawn_position = NodePath("SpawnPosition")
-metadata/_custom_type_script = "uid://diqrbhfl35phw"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDoor"]
-shape = SubResource("CircleShape2D_v1x83")
-
-[node name="Sprite2D" type="Sprite2D" parent="RoomDoor"]
-position = Vector2(-1.01328e-05, 0.999995)
-scale = Vector2(0.140625, 36)
-texture = SubResource("GradientTexture1D_v1x83")
-
-[node name="SpawnPosition" type="Node2D" parent="RoomDoor"]
-position = Vector2(-54, -25)
-script = ExtResource("6_v1x83")
-metadata/_custom_type_script = "uid://y2k6svdyl4md"
-
-[node name="PauseMenu" parent="." instance=ExtResource("7_aq8op")]
-
-[node name="Hud" parent="." node_paths=PackedStringArray("room_filler") instance=ExtResource("13_rgk8g")]
-room_filler = NodePath("../Environment")
+character_sheet = SubResource("Resource_1rpy6")
+inventory = SubResource("Resource_omxow")
+equipment = SubResource("Resource_40bss")

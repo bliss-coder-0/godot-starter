@@ -1,9 +1,8 @@
 {
   "spriteSheet": {
-    "id": "guns",
     "name": "Guns",
     "atlas": {
-      "path": "res://assets/img/guns.png",
+      "path": "res://assets/img/items/guns.png",
       "cell_size": 16,
       "hframes": 3,
       "vframes": 1
@@ -11,60 +10,52 @@
   },
   "items": [
     {
-      "id": "0",
       "frame": 0,
-      "category": ["equipable", "weapon", "ranged"],
-      "itemType": "gun",
-      "variant": "pistol",
-      "color": "black",
-      "damage": 1,
-      "fire_rate": 0.1,
-      "max_ammo": 10,
+      "type": "ranged_weapon",
+      "name": "black pistol",
+      "damage_min": 1.0,
+      "damage_max": 1.0,
+      "attack_rate": 0.1,
+      "max_ammo": 10.0,
       "unlimited_ammo": true,
-      "projectile": "res://scenes/weapons/projectiles/projectile.tscn",
-      "slot": ["left_hand", "right_hand"]
+      "projectile": "projectile",
+      "slot": "hand"
     },
     {
-      "id": "1",
       "frame": 1,
-      "category": ["equipable", "weapon", "ranged"],
-      "itemType": "gun",
-      "variant": "shotgun",
-      "color": "black",
-      "damage": 10,
-      "fire_rate": 0.5,
-      "max_ammo": 10,
+      "type": "ranged_weapon",
+      "name": "black shotgun",
+      "damage_min": 10.0,
+      "damage_max": 10.0,
+      "attack_rate": 0.5,
+      "max_ammo": 10.0,
       "unlimited_ammo": true,
-      "projectile": "res://scenes/weapons/projectiles/projectile.tscn",
-      "slot": ["left_hand", "right_hand"]
+      "projectile": "projectile",
+      "slot": "hand"
     },
     {
-      "id": "2",
       "frame": 2,
-      "category": ["equipable", "weapon", "ranged"],
-      "itemType": "gun",
-      "variant": "missle",
-      "color": "black",
-      "damage": 10,
-      "fire_rate": 1.0,
-      "max_ammo": 10,
+      "type": "ranged_weapon",
+      "name": "black missle",
+      "damage_min": 10.0,
+      "damage_max": 10.0,
+      "attack_rate": 1.0,
+      "max_ammo": 10.0,
       "unlimited_ammo": true,
-      "projectile": "res://scenes/weapons/projectiles/projectile_missle.tscn",
-      "slot": ["left_hand", "right_hand"]
+      "projectile": "projectile_missle",
+      "slot": "hand"
     },
     {
-      "id": "3",
       "frame": 0,
-      "category": ["equipable", "weapon", "ranged"],
-      "itemType": "gun",
-      "variant": "pistol",
-      "color": "black",
-      "damage": 1,
-      "fire_rate": 0.1,
-      "max_ammo": 10,
+      "type": "ranged_weapon",
+      "name": "black pistol",
+      "damage_min": 1.0,
+      "damage_max": 1.0,
+      "attack_rate": 0.1,
+      "max_ammo": 10.0,
       "unlimited_ammo": true,
-      "projectile": "res://scenes/weapons/projectiles/enemy_projectile.tscn",
-      "slot": ["left_hand", "right_hand"]
+      "projectile": "enemy_projectile",
+      "slot": "hand"
     }
   ]
 }

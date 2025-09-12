@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfdamqkrq06bk"]
 
-[ext_resource type="Script" uid="uid://bbu01ls8u8fow" path="res://scripts/effects/collisions/explosion.gd" id="1_sne8p"]
-[ext_resource type="Texture2D" uid="uid://dsjwoau47yk44" path="res://assets/img/BulletDamage-Sheet.png" id="1_xetud"]
-[ext_resource type="AudioStream" uid="uid://brjp1ast7o8mm" path="res://assets/audio/Hit.wav" id="2_uvuch"]
+[ext_resource type="Script" uid="uid://bbu01ls8u8fow" path="res://blisscode/effects/collisions/explosion.gd" id="1_sne8p"]
+[ext_resource type="Texture2D" uid="uid://dsjwoau47yk44" path="res://assets/img/effects/explosions/BulletDamage-Sheet.png" id="1_xetud"]
+[ext_resource type="AudioStream" uid="uid://brjp1ast7o8mm" path="res://assets/audio/effects/Hit.wav" id="2_uvuch"]
 
 [sub_resource type="Animation" id="Animation_xetud"]
 resource_name = "Explode"

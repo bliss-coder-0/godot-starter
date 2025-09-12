@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://c3sn1lvnaw1tp"]
 
-[ext_resource type="Script" uid="uid://1f3qoqbyq044" path="res://scripts/items/pickup.gd" id="1_76ea8"]
-[ext_resource type="Shader" uid="uid://pe35f4j2sr10" path="res://shaders/rarity.gdshader" id="1_a5use"]
-[ext_resource type="Texture2D" uid="uid://dg0r201xndfkx" path="res://assets/img/Coin-Sheet.png" id="2_4cg37"]
-[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/LightMask.png" id="3_gg01l"]
-[ext_resource type="AudioStream" uid="uid://bwr2p1a5f5qfh" path="res://assets/audio/pickupCoin.wav" id="5_d0157"]
+[ext_resource type="Script" uid="uid://1f3qoqbyq044" path="res://blisscode/item/pickup.gd" id="1_76ea8"]
+[ext_resource type="Shader" uid="uid://pe35f4j2sr10" path="res://blisscode/shaders/rarity.gdshader" id="1_a5use"]
+[ext_resource type="Texture2D" uid="uid://dg0r201xndfkx" path="res://assets/img/items/Coin-Sheet.png" id="2_4cg37"]
+[ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/masks/LightMask.png" id="3_gg01l"]
+[ext_resource type="AudioStream" uid="uid://bwr2p1a5f5qfh" path="res://assets/audio/effects/pickupCoin.wav" id="5_d0157"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d0157"]
 shader = ExtResource("1_a5use")

@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://b31r4po3jgb3u"]
+
+[ext_resource type="Script" uid="uid://stobcojgfp8s" path="res://blisscode/ui/audio/jukebox/jukebox.gd" id="1_lj7v1"]
+[ext_resource type="PackedScene" uid="uid://cyd1wnj2k44f" path="res://blisscode/ui/audio/jukebox/song_container.tscn" id="2_cjec2"]
+[ext_resource type="Texture2D" uid="uid://bw1opjjdb64cd" path="res://assets/img/ui/audio/AudioControls_Prev.png" id="2_utn00"]
+[ext_resource type="Texture2D" uid="uid://bucrtj6i7n6up" path="res://assets/img/ui/audio/AudioControls_Play.png" id="3_cjec2"]
+[ext_resource type="Texture2D" uid="uid://c86etx1qn71pf" path="res://assets/img/ui/audio/AudioControls_Stop.png" id="4_6qej7"]
+[ext_resource type="Texture2D" uid="uid://c3uiwx4887mwy" path="res://assets/img/ui/audio/AudioControls_Pause.png" id="5_8g36o"]
+[ext_resource type="Texture2D" uid="uid://d2isl1264nh3v" path="res://assets/img/ui/audio/AudioControls_Repeat.png" id="6_u7i2i"]
+[ext_resource type="Texture2D" uid="uid://dw0cgydf7rmnl" path="res://assets/img/ui/audio/AudioControls_Next.png" id="7_up0q2"]
+
+[node name="Jukebox" type="Node2D" node_paths=PackedStringArray("playlist_name_label", "previous_button", "play_button", "stop_button", "pause_button", "repeat_button", "next_button", "songlist_container")]
+process_mode = 3
+script = ExtResource("1_lj7v1")
+current_playlist = "chiptune_1"
+playlist_name_label = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/HBoxContainer/PlaylistNameLabel")
+previous_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/PrevButton")
+play_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/PlayButton")
+stop_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/StopButton")
+pause_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/PauseButton")
+repeat_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/RepeatButton")
+next_button = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls/NextButton")
+songlist_container = NodePath("CanvasLayer/Panel/MarginContainer/VBoxContainer/ScrollContainer/SongListContainer")
+song_container_scene = ExtResource("2_cjec2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -82.0
+offset_right = 76.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlaylistNameLabel" type="Label" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Playlist Name"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SongListContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerControls" type="HBoxContainer" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PrevButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("2_utn00")
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("3_cjec2")
+
+[node name="StopButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("4_6qej7")
+
+[node name="PauseButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("5_8g36o")
+
+[node name="RepeatButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("6_u7i2i")
+
+[node name="NextButton" type="TextureButton" parent="CanvasLayer/Panel/MarginContainer/VBoxContainer/PlayerControls"]
+layout_mode = 2
+texture_normal = ExtResource("7_up0q2")
