@@ -1,23 +1,6 @@
 @tool
 class_name PlayerControls extends CharacterControls
 
-@export_tool_button("Mobile", "Callable") var mobile_action = mobile_controls
-
-func mobile_controls():
-	aim_type = AimType.TOUCH
-	movement_type = MovementType.TOUCH
-	facing_type = FacingType.TOUCH
-	attack_type = AttackType.TOUCH
-
-@export_tool_button("Console", "Callable") var console_action = console_controls
-
-func console_controls():
-	aim_type = AimType.JOYSTICK
-	movement_type = MovementType.JOYSTICK
-	facing_type = FacingType.JOYSTICK
-	attack_type = AttackType.JOYSTICK
-
-@export_tool_button("PC", "Callable") var pc_action = pc_controls
 
 @export_group("Debug")
 @export var aim_sprite: Sprite2D
@@ -25,22 +8,7 @@ func console_controls():
 @export var touch_sprite: Sprite2D
 @export var show_touch_sprite: bool = true
 
-func pc_controls():
-	aim_type = AimType.MOUSE
-	movement_type = MovementType.KEYBOARD
-	facing_type = FacingType.MOUSE
-	attack_type = AttackType.MOUSE
 
-var touch_position: Vector2 = Vector2.ZERO
-var is_touching: bool = false
-
-enum DOUBLE_TAP_DIRECTION {NONE, LEFT, RIGHT, UP, DOWN}
-
-var double_tap_direction = DOUBLE_TAP_DIRECTION.NONE
-var double_tap_timer: Timer = null
-var double_tap_time: float = 0.3
-var double_tap_count: int = 0
-var last_pressed_movement: String = ""
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -55,7 +23,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
-	if event is InputEventScreenTouch and event.double_tap and attack_type == AttackType.TOUCH:
+	if event is InputEventScreenTouch and event.double_tap and GameManager.user_config.attack_type == UserConfig.AttackType.TOUCH:
 		touch_position = to_world_position(event.position)
 		#_attack_right_hand()
 	elif event is InputEventScreenDrag:
@@ -82,7 +50,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	_update_aim_sprite()
 	_double_tap_dash()
-	if attack_type == AttackType.TOUCH:
+	if GameManager.user_config.attack_type == UserConfig.AttackType.TOUCH:
 		if is_touching:
 			simulate_button_press("attack_left_hand")
 
@@ -153,15 +121,15 @@ func _update_aim_sprite():
 			aim_sprite.hide()
 
 func get_aim_direction():
-	if aim_type == AimType.DEFAULT:
+	if GameManager.user_config.aim_type == UserConfig.AimType.DEFAULT:
 		return get_default_aim_direction()
-	elif aim_type == AimType.TOUCH:
+	elif GameManager.user_config.aim_type == UserConfig.AimType.TOUCH:
 		return get_touch_aim_direction()
-	elif aim_type == AimType.MOUSE:
+	elif GameManager.user_config.aim_type == UserConfig.AimType.MOUSE:
 		return get_mouse_aim_direction()
-	elif aim_type == AimType.KEYBOARD:
+	elif GameManager.user_config.aim_type == UserConfig.AimType.KEYBOARD:
 		return get_keyboard_aim_direction()
-	elif aim_type == AimType.JOYSTICK:
+	elif GameManager.user_config.aim_type == UserConfig.AimType.JOYSTICK:
 		return get_joystick_aim_direction()
 
 func get_default_aim_direction():
@@ -198,15 +166,15 @@ func get_joystick_aim_direction():
 func get_movement_direction():
 	if parent.paralyzed:
 		return Vector2.ZERO
-	if movement_type == MovementType.DEFAULT:
+	if GameManager.user_config.movement_type == UserConfig.MovementType.DEFAULT:
 		return get_default_movement_direction()
-	elif movement_type == MovementType.MOUSE:
+	elif GameManager.user_config.movement_type == UserConfig.MovementType.MOUSE:
 		return get_mouse_movement_direction()
-	elif movement_type == MovementType.KEYBOARD:
+	elif GameManager.user_config.movement_type == UserConfig.MovementType.KEYBOARD:
 		return get_keyboard_movement_direction()
-	elif movement_type == MovementType.JOYSTICK:
+	elif GameManager.user_config.movement_type == UserConfig.MovementType.JOYSTICK:
 		return get_joystick_movement_direction()
-	elif movement_type == MovementType.TOUCH:
+	elif GameManager.user_config.movement_type == UserConfig.MovementType.TOUCH:
 		return get_touch_movement_direction()
 
 func get_default_movement_direction():

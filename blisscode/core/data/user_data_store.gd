@@ -7,8 +7,6 @@ var base_dir = "user://user_data_store"
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	print("Loading User Data Store from ", base_dir)
-	print("User Data Store config", user_data_store_config.save())
 	
 func get_player_dir() -> String:
 	return str(base_dir, "/", user_data_store_config.user_folder_index)
@@ -28,7 +26,7 @@ func get_saves():
 
 func get_restore_data():
 	var player_dir = get_player_dir()
-	var index = user_data_store_config.restore_index + 1
+	var index = user_data_store_config.restore_index
 	var path = str(player_dir, "/user_data_store_", index, ".dat")
 	var data = FilesUtil.restore(path)
 	return data
@@ -49,21 +47,27 @@ func save(description: String):
 	FilesUtil.create_dir(player_dir) # Ensure directory exists
 	var index = _get_next_index()
 	var path = str(player_dir, "/user_data_store_", index, ".dat")
+	var world_data = _get_world_data()
 	var data = {
 		"index": index,
 		"description": description,
-		"timestamp": Time.get_datetime_string_from_system(false, true)
+		"timestamp": Time.get_datetime_string_from_system(false, true),
+		"world_data": world_data
 	}
 	FilesUtil.save(path, data)
 	save_persisting_nodes(index)
 	
-func restore(index):
-	var player_dir = get_player_dir()
-	var path = str(player_dir, "/user_data_store_", index, ".dat")
-	var data = FilesUtil.restore(path)
-	print(data)
-	restore_persisting_nodes(index)
+func restore():
+	print("Restoring persisting nodes")
+	_restore_persisting_nodes()
 	
+func _get_world_data():
+	var root = get_tree().get_root()
+	for node in root.get_children():
+		if node is World:
+			return node.save()
+	return null
+
 func save_persisting_nodes(index):
 	if not get_tree():
 		return
@@ -93,7 +97,8 @@ func get_persisting_nodes():
 		node_data_arr.append(node_data)
 	return node_data_arr
 
-func restore_persisting_nodes(index):
+func _restore_persisting_nodes():
+	var index = user_data_store_config.restore_index
 	var player_dir = get_player_dir()
 	var path = str(player_dir, "/persist_nodes_", index, ".dat")
 	if not FileAccess.file_exists(path):
@@ -124,7 +129,7 @@ func restore_persisting_nodes(index):
 				if node.has_method("spawn_restore"):
 					node.call("spawn_restore")
 #
-			print(node, node_data)
+			# print(node, node_data)
 		else:
 			print("JSON Parse Error: ", json.get_error_message(), " in ", line, " at line ", json.get_error_line())
 	file.close()

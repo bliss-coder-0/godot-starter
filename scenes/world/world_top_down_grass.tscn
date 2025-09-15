@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://phtelv84rkk2"]
+[gd_scene load_steps=24 format=4 uid="uid://phtelv84rkk2"]
 
 [ext_resource type="Script" uid="uid://bm85budamtxnd" path="res://blisscode/core/world/world.gd" id="1_sw1yw"]
 [ext_resource type="Script" uid="uid://be1sydgbkih6o" path="res://blisscode/room/rooms.gd" id="2_au4vk"]
@@ -8,6 +8,12 @@
 [ext_resource type="Script" uid="uid://y2k6svdyl4md" path="res://blisscode/core/spawning/spawn_position.gd" id="4_o0q43"]
 [ext_resource type="Script" uid="uid://dawrnhrddu0kw" path="res://blisscode/core/world/world_door.gd" id="6_o0q43"]
 [ext_resource type="Script" uid="uid://ddlo01mfc118i" path="res://blisscode/core/spawning/spawner.gd" id="7_au4vk"]
+[ext_resource type="Script" uid="uid://cqwk88xhb2juy" path="res://blisscode/generation/room_filler.gd" id="9_n60aj"]
+[ext_resource type="PackedScene" uid="uid://c3sn1lvnaw1tp" path="res://scenes/items/pickups/pickup.tscn" id="9_sw1yw"]
+[ext_resource type="Script" uid="uid://dx15io88tra7t" path="res://blisscode/item/ranged_weapon.gd" id="10_am3bl"]
+[ext_resource type="PackedScene" uid="uid://d1uon38qbt45i" path="res://scenes/entities/rigid/rigid_block_entity.tscn" id="10_rweew"]
+[ext_resource type="PackedScene" uid="uid://dhtvv0vpxt0sy" path="res://scenes/entities/static/static_block_entity.tscn" id="11_08x20"]
+[ext_resource type="Texture2D" uid="uid://djiv6d5fhe0c" path="res://assets/img/items/guns.png" id="11_13rxq"]
 
 [sub_resource type="Environment" id="Environment_6m72w"]
 background_mode = 3
@@ -39,6 +45,41 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 148, 89, 0, 0, 0, 0, 153, -94, 0, 0, 0, 0, -24, -98, 0, 0, 0, 0, -17, 87, 0, 0, 0, 0, 148, 89)
 }
 point_count = 5
+
+[sub_resource type="Resource" id="Resource_am3bl"]
+script = ExtResource("10_am3bl")
+projectile = "projectile"
+max_ammo = 10
+unlimited_ammo = true
+ammo = 0
+spread = 10
+spread_angle = 0.05
+screen_shake_amount = 2.0
+damage_min = 10
+damage_max = 10
+attack_rate = 0.5
+stamina_cost = 0.0
+weight = 0
+durability = 0
+sell_price = 0
+buy_price = 0
+rarity = 0
+level_requirement = 0
+slot = 9
+equip_on_pickup = true
+effect = Array[int]([])
+package = "guns"
+name = "black shotgun"
+description = ""
+is_level_unique = false
+is_game_unique = false
+is_stackable = false
+max_stackable_count = 1
+texture = ExtResource("11_13rxq")
+frame = 1
+hframes = 3
+vframes = 1
+metadata/_custom_type_script = "uid://dx15io88tra7t"
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_sw1yw")
@@ -101,14 +142,13 @@ position = Vector2(-144, 247)
 script = ExtResource("4_o0q43")
 metadata/_custom_type_script = "uid://y2k6svdyl4md"
 
-[node name="WorldDoor" type="Area2D" parent="Rooms/Room1" node_paths=PackedStringArray("spawn_position", "entities_node")]
+[node name="WorldDoor" type="Area2D" parent="Rooms/Room1" node_paths=PackedStringArray("spawn_position")]
 position = Vector2(816, 422)
 script = ExtResource("6_o0q43")
 door_id = "world_1"
 goto_door_id = "world_2"
 scene_path = "res://scenes/world/world_top_down_grass_2.tscn"
 spawn_position = NodePath("SpawnPosition")
-entities_node = NodePath("")
 metadata/_custom_type_script = "uid://dawrnhrddu0kw"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room1/WorldDoor"]
@@ -125,19 +165,19 @@ position = Vector2(683, 427)
 script = ExtResource("4_o0q43")
 metadata/_custom_type_script = "uid://y2k6svdyl4md"
 
-[node name="PlayerSpawner" type="Node2D" parent="Rooms/Room1" node_paths=PackedStringArray("entity_parent")]
-position = Vector2(581, 429)
+[node name="PlayerSpawner" type="Node2D" parent="Rooms/Room1" node_paths=PackedStringArray("entity_container")]
+position = Vector2(358, 389)
 script = ExtResource("7_au4vk")
 entity_name = "player"
-entity_parent = NodePath("../../..")
+entity_container = NodePath("../../../EntityContainer")
 metadata/_custom_type_script = "uid://ddlo01mfc118i"
 
-[node name="EnemyPathSpawner" type="Node2D" parent="Rooms/Room1" node_paths=PackedStringArray("entity_parent", "paths")]
+[node name="EnemyPathSpawner" type="Node2D" parent="Rooms/Room1" node_paths=PackedStringArray("paths", "entity_container")]
 position = Vector2(581, 429)
 script = ExtResource("7_au4vk")
 entity_name = "enemy_path"
-entity_parent = NodePath("../../..")
 paths = [NodePath("Path2D")]
+entity_container = NodePath("../../../EntityContainer")
 metadata/_custom_type_script = "uid://ddlo01mfc118i"
 
 [node name="Path2D" type="Path2D" parent="Rooms/Room1/EnemyPathSpawner"]
@@ -148,3 +188,16 @@ curve = SubResource("Curve2D_glygm")
 [node name="PathFollow2D" type="PathFollow2D" parent="Rooms/Room1/EnemyPathSpawner/Path2D"]
 position = Vector2(148, 89)
 rotation = -1.54348
+
+[node name="Pickup" parent="Rooms/Room1" instance=ExtResource("9_sw1yw")]
+position = Vector2(462, 401)
+item = SubResource("Resource_am3bl")
+
+[node name="EntityContainer" type="Node2D" parent="."]
+top_level = true
+
+[node name="RoomFiller" type="Node2D" parent="."]
+script = ExtResource("9_n60aj")
+altitude_scenes = Array[PackedScene]([ExtResource("10_rweew"), ExtResource("11_08x20")])
+altitude_threshold = 0.1
+metadata/_custom_type_script = "uid://cqwk88xhb2juy"

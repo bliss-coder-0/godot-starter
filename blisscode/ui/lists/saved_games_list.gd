@@ -36,7 +36,7 @@ func create_save_game_row(save_data: Dictionary) -> void:
 	# Load button
 	var load_button = MenuLoadGameButton.new()
 	load_button.text = "Load"
-	load_button.save_index = save_data.get("index", -1)
+	load_button.restore_index = save_data.get("index", -1)
 	hbox.add_child(load_button)
 
 # Format timestamp to be more user-friendly

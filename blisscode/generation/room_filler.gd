@@ -20,8 +20,7 @@ var max_enemies = 0
 signal enemies_killed(count: int, max_count: int)
 
 func _ready():
-	#call_deferred("generate_room")
-	pass
+	call_deferred("generate_room")
 
 func generate_room():
 	temperature.seed = randi();

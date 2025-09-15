@@ -313,10 +313,12 @@ modulate = Color(1, 1, 1, 0)
 texture = ExtResource("5_oe3by")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, 0)
 zoom = Vector2(2, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_fokug")
 }
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")

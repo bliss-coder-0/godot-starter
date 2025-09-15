@@ -15,7 +15,6 @@ func _on_button_pressed() -> void:
 	saved_games_list.refresh()
 	load_games_list.refresh()
 
-
 func _on_description_text_changed(new_text: String) -> void:
 	if new_text == "":
 		disabled = true

@@ -63,6 +63,7 @@ func game_start():
 	SceneManager.goto_scene(GameManager.game_config.game_start_scene)
 
 func game_restore():
+	GameManager.game_config.set_state(GameConfig.GAME_STATE.GAME_RESTORE)
 	GameUi.game_menus.menu_stack.pop_all()
 	SceneManager.goto_scene(GameManager.game_config.game_restore_scene)
 
@@ -75,3 +76,9 @@ func reset():
 func print_config():
 	print("UserConfig: ", user_config.save())
 	print("GameConfig: ", game_config.save())
+
+func get_user_config() -> UserConfig:
+	return user_config
+
+func get_game_config() -> GameConfig:
+	return game_config

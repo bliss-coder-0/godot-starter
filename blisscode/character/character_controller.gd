@@ -66,12 +66,12 @@ signal died(character: CharacterController)
 signal ammo_changed(item: Item, ammo: int)
 
 func _ready() -> void:
-	original_speed = speed
 	if navigation_agent:
 		navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	velocity = Vector2.ZERO
-	paralyzed = false
-	spawned.emit(global_position)
+	call_deferred("_after_ready")
+
+func _after_ready():
+	spawn(position)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dash"):
@@ -145,15 +145,12 @@ func change_to_position(new_position: Vector2 = Vector2.ZERO):
 	position = new_position
 
 func spawn(spawn_position: Vector2 = Vector2.ZERO):
+	original_speed = speed
+	velocity = Vector2.ZERO
+	paralyzed = false
 	position = spawn_position
 	spawned.emit(global_position)
 	focus()
-
-func spawn_restore():
-	velocity.x = 0
-	velocity.y = 0
-	paralyzed = false
-	spawned.emit(global_position)
 	
 func spawn_random_from_nav():
 	if navigation_agent:
@@ -161,11 +158,9 @@ func spawn_random_from_nav():
 		if map == null:
 			return
 		var random_point = NavigationServer2D.map_get_random_point(map, 1, false)
-		position = random_point
-		spawned.emit(global_position)
+		spawn(random_point)
 	else:
-		position = position
-		spawned.emit(global_position)
+		spawn(position)
 		
 func paralyze():
 	paralyzed = true
@@ -303,17 +298,18 @@ func _resolve_collision(collision):
 		#parent._on_take_damage(damage_amount)
 
 func _update_facing_direction():
-	if controls.facing_type == CharacterControls.FacingType.MOUSE:
-		var mouse_pos = get_global_mouse_position()
-		is_facing_right = mouse_pos.x > position.x
-	elif controls.facing_type == CharacterControls.FacingType.TOUCH:
-		is_facing_right = controls.touch_position.x > global_position.x
-	elif controls.facing_type == CharacterControls.FacingType.KEYBOARD:
-		is_facing_right = velocity.x > 0
-	elif controls.facing_type == CharacterControls.FacingType.JOYSTICK:
-		is_facing_right = velocity.x > 0
-	elif controls.facing_type == CharacterControls.FacingType.DEFAULT:
-		is_facing_right = velocity.x > 0
+	match GameManager.user_config.facing_type:
+		UserConfig.FacingType.MOUSE:
+			var mouse_pos = get_global_mouse_position()
+			is_facing_right = mouse_pos.x > position.x
+		UserConfig.FacingType.TOUCH:
+			is_facing_right = controls.touch_position.x > global_position.x
+		UserConfig.FacingType.KEYBOARD:
+			is_facing_right = velocity.x > 0
+		UserConfig.FacingType.JOYSTICK:
+			is_facing_right = velocity.x > 0
+		UserConfig.FacingType.DEFAULT:
+			is_facing_right = velocity.x > 0
 	_handle_flip()
 
 func _handle_flip():
@@ -348,9 +344,9 @@ func consume(item: Item, pos: Vector2):
 
 func equip(item: Item, pos: Vector2):
 	if item.equip_on_pickup:
-		equipment.equip(item.id, equipment.get_next_available_slot(item.slot))
+		equipment.equip(item, equipment.get_slot_type(item.slot))
 	else:
-		inventory.add(item.id, pos)
+		inventory.add(item, pos)
 
 func attack_left_hand():
 	if cooldown_left_hand:
@@ -373,9 +369,33 @@ func attack_right_hand():
 func attack_ranged_weapon(item: RangedWeapon, direction: Vector2):
 	if (!item.unlimited_ammo and item.ammo <= 0):
 		return
-	if not item.unlimited_ammo:
-		item.ammo -= 1
-	SpawnManager.spawn_projectile(item.projectile, global_position, direction)
+	if item.screen_shake_amount > 0.0:
+		ScreenShake.apply_shake(item.screen_shake_amount, 2.0, 10.0)
+	if item.spread == 1:
+		if not item.unlimited_ammo:
+			item.ammo -= 1
+		# Single projectile - normal behavior
+		SpawnManager.spawn_projectile(item.projectile, global_position, direction)
+	else:
+		# Multiple projectiles with spread
+		for i in range(item.spread):
+			var spread_offset = 0.0
+			if item.spread > 1:
+				# Calculate spread offset based on projectile index
+				var half_spread = (item.spread - 1) * 0.5
+				spread_offset = (i - half_spread) * item.spread_angle
+			
+			# Calculate spread direction
+			var spread_direction = direction.rotated(spread_offset)
+			
+			# Calculate spread position (offset perpendicular to direction)
+			var perpendicular = Vector2(-direction.y, direction.x)
+			var spread_position = global_position + (perpendicular * spread_offset * 50.0) # 50.0 is a distance multiplier
+			
+			if not item.unlimited_ammo:
+				item.ammo -= 1
+			SpawnManager.spawn_projectile(item.projectile, spread_position, spread_direction)
+	
 	ammo_changed.emit(item, item.ammo)
 
 func focus():

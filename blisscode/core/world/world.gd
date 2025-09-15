@@ -6,7 +6,9 @@ var world_doors: Array[WorldDoor] = []
 
 func _ready() -> void:
 	_find_world_doors(self)
-	
+	call_deferred("_after_ready")
+
+func _after_ready():
 	if GameManager.game_config.game_state == GameConfig.GAME_STATE.GAME_RESTORE:
 		_restore_spwan()
 	else:
@@ -15,13 +17,10 @@ func _ready() -> void:
 	GameUi.hud.show_hud()
 	
 func _restore_spwan():
-	print("Restore")
+	UserDataStore.restore()
 	GameManager.game_config.set_state(GameConfig.GAME_STATE.GAME_PLAY)
 	
 func _default_spawn():
-	var world_door_spawn = null
-	if world_door_spawn:
-		world_door_spawn.spawn_player()
 	GameManager.game_config.set_state(GameConfig.GAME_STATE.GAME_PLAY)
 	
 func _find_world_doors(node: Node):

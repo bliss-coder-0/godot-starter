@@ -1,7 +1,5 @@
 class_name Entity extends Node2D
 
-# TDDO make a EntiryManager instead of spawn manager, Deprecate Spwan manager in favor of this
-
 @export var entity_sheet: EntitySheet
 
 @export_group("Drop")
@@ -17,6 +15,9 @@ signal spawned(pos: Vector2)
 signal died(pos: Vector2)
 signal health_changed(health_change: int, max_health: int)
 signal armor_changed(armor_change: int, max_armor: int)
+
+func _ready() -> void:
+	entity_sheet = entity_sheet.duplicate()
 
 func spawn(pos: Vector2 = Vector2.ZERO):
 	position = pos

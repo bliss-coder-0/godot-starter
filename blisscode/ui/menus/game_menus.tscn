@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dgq6syw2qe32p"]
+[gd_scene load_steps=29 format=3 uid="uid://dgq6syw2qe32p"]
 
 [ext_resource type="Script" uid="uid://bxu41q8tb6kv5" path="res://blisscode/ui/menus/game_menus.gd" id="1_od5r7"]
 [ext_resource type="Script" uid="uid://cg8iv8veotlm8" path="res://blisscode/ui/menus/menu/menu_stack.gd" id="3_ljqv8"]
@@ -10,9 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://c40xhlbq0xxj2" path="res://blisscode/ui/volume_slider/volume_slider.tscn" id="8_fn1d8"]
 [ext_resource type="Script" uid="uid://dld4x2ypkgy5l" path="res://blisscode/ui/menus/menu/menu_save_game_button.gd" id="9_062ld"]
 [ext_resource type="AudioStream" uid="uid://da5oygxus6g8a" path="res://assets/audio/effects/click.mp3" id="9_kxayy"]
+[ext_resource type="PackedScene" uid="uid://bxsuo25o46jh8" path="res://blisscode/ui/menus/menu/controls_menu/input_listener_overlay.tscn" id="10_0bqtc"]
 [ext_resource type="AudioStream" uid="uid://d024mg5knpil1" path="res://assets/audio/effects/wind-swipe.mp3" id="10_j0ome"]
 [ext_resource type="Script" uid="uid://dmd7m3eghknnn" path="res://blisscode/ui/lists/saved_games_list.gd" id="10_ljqv8"]
+[ext_resource type="Script" uid="uid://chqodxm47k6c0" path="res://blisscode/ui/menus/menu/controls_menu/input_options_button.gd" id="10_vwoi7"]
 [ext_resource type="AudioStream" uid="uid://bko8nhioem3o2" path="res://assets/audio/effects/wind-swipe-away.mp3" id="11_7tdw4"]
+[ext_resource type="Script" uid="uid://cb1l7kt3hpgmp" path="res://blisscode/ui/menus/menu/controls_menu/controls_menu_script.gd" id="12_controls"]
 
 [sub_resource type="Animation" id="Animation_hibng"]
 length = 0.001
@@ -782,6 +785,13 @@ script = ExtResource("5_vwoi7")
 menu_stack = NodePath("../../../../../..")
 to_menu = NodePath("../../../../../../AudioMenu")
 
+[node name="ButtonControls" type="Button" parent="MenuStack/SettingsMenu/Control/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu")]
+layout_mode = 2
+text = "Controls"
+script = ExtResource("5_vwoi7")
+menu_stack = NodePath("../../../../../..")
+to_menu = NodePath("../../../../../../ControlsMenu")
+
 [node name="ButtonBack" type="Button" parent="MenuStack/SettingsMenu/Control/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("menu_stack")]
 layout_mode = 2
 text = "Back
@@ -815,10 +825,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.5
-offset_top = -46.5
-offset_right = 64.5
-offset_bottom = 46.5
+offset_left = -98.0
+offset_top = -90.0
+offset_right = 98.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -829,10 +839,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer"]
 layout_mode = 2
@@ -862,7 +872,10 @@ menu_stack = NodePath("../../../../../../..")
 to_menu = NodePath("../../../../../../../AudioMenu")
 metadata/_custom_type_script = "uid://kfj666n2xifd"
 
-[node name="SaveButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu")]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("menu_stack", "to_menu")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
@@ -871,7 +884,7 @@ menu_stack = NodePath("../../../../../../..")
 to_menu = NodePath("../../../../../../../SaveGameMenu")
 metadata/_custom_type_script = "uid://kfj666n2xifd"
 
-[node name="LoadButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_stack", "to_menu")]
+[node name="LoadButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer3" node_paths=PackedStringArray("menu_stack", "to_menu")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Load"
@@ -883,17 +896,17 @@ metadata/_custom_type_script = "uid://kfj666n2xifd"
 [node name="HSeparator" type="HSeparator" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="BackButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("menu_stack")]
+[node name="BackButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer" node_paths=PackedStringArray("menu_stack")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back"
 script = ExtResource("6_0bqtc")
-menu_stack = NodePath("../../../../../../..")
+menu_stack = NodePath("../../../../../..")
 unpause_game = true
 metadata/_custom_type_script = "uid://jnyn4yy8houc"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="MenuStack/PauseMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -994,8 +1007,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_e8wlj")
 }
 
-[node name="ControlsMenu" type="CanvasLayer" parent="MenuStack"]
-script = ExtResource("4_bg78d")
+[node name="ControlsMenu" type="CanvasLayer" parent="MenuStack" node_paths=PackedStringArray("action_list_container", "reset_button", "back_button")]
+script = ExtResource("12_controls")
+overlay_scene = ExtResource("10_0bqtc")
+action_list_container = NodePath("Control/Panel/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/ActionListContainer")
+reset_button = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/ResetButton")
+back_button = NodePath("Control/Panel/MarginContainer/VBoxContainer/HBoxContainer/BackButton")
 metadata/_custom_type_script = "uid://cfidra8l63jcf"
 
 [node name="Control" type="Control" parent="MenuStack/ControlsMenu"]
@@ -1014,10 +1031,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.5
-offset_top = -46.5
-offset_right = 64.5
-offset_bottom = 46.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1028,10 +1045,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer"]
 layout_mode = 2
@@ -1039,11 +1056,105 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Controls"
+horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("menu_stack")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5/HBoxContainer2"]
+layout_mode = 2
+script = ExtResource("10_vwoi7")
+type = "Movement"
+
+[node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Movement"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("10_vwoi7")
+type = "Aim"
+
+[node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer5/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Aim"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+script = ExtResource("10_vwoi7")
+type = "Facing"
+
+[node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Facing"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="OptionButton" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+layout_mode = 2
+script = ExtResource("10_vwoi7")
+type = "Attack"
+
+[node name="Label" type="Label" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attack"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_right = 5
+
+[node name="ActionListContainer" type="VBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset to Defaults"
+
+[node name="BackButton" type="Button" parent="MenuStack/ControlsMenu/Control/Panel/MarginContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("menu_stack")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Back"

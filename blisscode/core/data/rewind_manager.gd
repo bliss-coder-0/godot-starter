@@ -14,7 +14,6 @@ var rewind_interval: float = 0.1 # How often to restore while rewinding
 
 func _ready():
 	max_history_size = int(max_rewind_time / store_interval)
-	print("RewindManager initialized with max_history_size: ", max_history_size)
 		
 func _physics_process(delta):
 	# Store state every second when not rewinding
@@ -33,10 +32,8 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed(rewind_input_action):
-		print("Rewind button pressed!")
 		_start_rewind()
 	elif event.is_action_released(rewind_input_action):
-		print("Rewind button released!")
 		_stop_rewind()
 
 func _store_current_state():

@@ -77,52 +77,29 @@ func unequip(equipment_slot_type: EquipmentSlotType):
 			right_finger = null
 	equipment_change.emit()
 
-func get_slot_type(slot: String):
-	match slot:
-		"head":
-			return EquipmentSlotType.Helmet
-		"neck":
-			return EquipmentSlotType.Neck
-		"chest":
-			return EquipmentSlotType.Chest
-		"waist":
-			return EquipmentSlotType.Waist
-		"legs":
-			return EquipmentSlotType.Legs
-		"feet":
-			return EquipmentSlotType.Boots
-		"hands":
-			return EquipmentSlotType.Gloves
-		"left_finger":
-			return EquipmentSlotType.LeftFinger
-		"right_finger":
-			return EquipmentSlotType.RightFinger
-
-func get_next_available_slot(slots: Array[String]):
-	for slot in slots:
-		var slot_type = get_slot_type(slot)
-		if slot_type == EquipmentSlotType.Helmet and head == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Neck and neck == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Chest and chest == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Waist and waist == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Legs and legs == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Boots and feet == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.Gloves and hand == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.LeftFinger and left_finger == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.RightFinger and right_finger == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.LeftHand and left_hand == null:
-			return slot_type
-		if slot_type == EquipmentSlotType.RightHand and right_hand == null:
-			return slot_type
+func get_slot_type(slot_type: Equipable.EquipableSlotType) -> EquipmentSlotType:
+	if slot_type == Equipable.EquipableSlotType.Helmet:
+		return EquipmentSlotType.Helmet
+	if slot_type == Equipable.EquipableSlotType.Neck:
+		return EquipmentSlotType.Neck
+	if slot_type == Equipable.EquipableSlotType.Chest:
+		return EquipmentSlotType.Chest
+	if slot_type == Equipable.EquipableSlotType.Waist:
+		return EquipmentSlotType.Waist
+	if slot_type == Equipable.EquipableSlotType.Legs:
+		return EquipmentSlotType.Legs
+	if slot_type == Equipable.EquipableSlotType.Boots:
+		return EquipmentSlotType.Boots
+	if slot_type == Equipable.EquipableSlotType.Gloves:
+		return EquipmentSlotType.Gloves
+	if slot_type == Equipable.EquipableSlotType.Finger:
+		return EquipmentSlotType.LeftFinger
+	if slot_type == Equipable.EquipableSlotType.Finger:
+		return EquipmentSlotType.RightFinger
+	if slot_type == Equipable.EquipableSlotType.Hand:
+		return EquipmentSlotType.LeftHand
+	if slot_type == Equipable.EquipableSlotType.Hand:
+		return EquipmentSlotType.RightHand
 	return EquipmentSlotType.None
 
 

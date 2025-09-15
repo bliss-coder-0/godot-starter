@@ -6,8 +6,8 @@
 [sub_resource type="Resource" id="Resource_eodsa"]
 script = ExtResource("2_nfjot")
 entity_name = "RigidBlock"
-health = 100
-max_health = 100
+health = 5
+max_health = 5
 armor = 0
 max_armor = 0
 metadata/_custom_type_script = "uid://chm57l84dp8et"
@@ -26,6 +26,7 @@ gradient = SubResource("Gradient_eoo0a")
 [node name="RigidBlockEntity" type="Node2D"]
 script = ExtResource("1_cfy20")
 entity_sheet = SubResource("Resource_eodsa")
+garbage = true
 metadata/_custom_type_script = "uid://bynqbd3uqdtnh"
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

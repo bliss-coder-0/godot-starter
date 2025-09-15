@@ -1,14 +1,15 @@
 class_name CharacterControls extends Node
 
-enum AimType {DEFAULT, MOUSE, KEYBOARD, JOYSTICK, TOUCH, AI}
-enum MovementType {DEFAULT, MOUSE, KEYBOARD, JOYSTICK, TOUCH, AI}
-enum FacingType {DEFAULT, MOUSE, KEYBOARD, JOYSTICK, TOUCH, AI}
-enum AttackType {DEFAULT, MOUSE, KEYBOARD, JOYSTICK, TOUCH, AI}
+var touch_position: Vector2 = Vector2.ZERO
+var is_touching: bool = false
 
-@export var movement_type: MovementType = MovementType.DEFAULT
-@export var aim_type: AimType = AimType.DEFAULT
-@export var facing_type: FacingType = FacingType.DEFAULT
-@export var attack_type: AttackType = AttackType.DEFAULT
+enum DOUBLE_TAP_DIRECTION {NONE, LEFT, RIGHT, UP, DOWN}
+
+var double_tap_direction = DOUBLE_TAP_DIRECTION.NONE
+var double_tap_timer: Timer = null
+var double_tap_time: float = 0.3
+var double_tap_count: int = 0
+var last_pressed_movement: String = ""
 
 var parent: CharacterController
 

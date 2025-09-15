@@ -45,8 +45,8 @@ enum EquipableEffect {
 @export var equip_on_pickup: bool = false
 @export var effect: Array[EquipableEffect] = []
 
-func get_slot_type(slot: String):
-	match slot:
+func get_slot_type(s: String):
+	match s:
 		"head":
 			return EquipableSlotType.Helmet
 		"neck":
@@ -66,8 +66,8 @@ func get_slot_type(slot: String):
 		_:
 			return EquipableSlotType.None
 
-func save_slot_type(slot: EquipableSlotType):
-	match slot:
+func save_slot_type(s: EquipableSlotType):
+	match s:
 		EquipableSlotType.Helmet:
 			return "head"
 		EquipableSlotType.Neck:
