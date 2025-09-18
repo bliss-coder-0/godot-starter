@@ -1,4 +1,5 @@
 @tool
+@abstract
 class_name Weapon extends Equipable
 
 @export var damage_min: int = 0

@@ -22,5 +22,5 @@ func _update_label():
 	parent_position = parent.global_position.round()
 	text = "%s\n%s\n%s\n%s" % [parent_position, movement_direction, aim_direction, current_gold]
 	
-func _on_gold_changed(amount, _pos):
+func _on_gold_changed(amount):
 	current_gold = amount

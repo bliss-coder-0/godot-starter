@@ -1,4 +1,5 @@
 @tool
+@abstract
 class_name Item extends Resource
 
 @export var package: String = ""

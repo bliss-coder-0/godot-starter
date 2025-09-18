@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkr5b11mpccfv"]
 
-[ext_resource type="Script" uid="uid://ccnflf2vpdggk" path="res://blisscode/dialogue/dialogue_bubble.gd" id="1_7uncl"]
+[ext_resource type="Script" uid="uid://ccnflf2vpdggk" path="res://blisscode/dialog/dialogue_bubble.gd" id="1_7uncl"]
 
 [sub_resource type="Animation" id="Animation_lfj4e"]
 length = 0.001
@@ -42,19 +42,25 @@ dialogue_text = NodePath("DialogueText")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="DialogueText" type="Label" parent="."]
+offset_top = 3.0
 offset_right = 94.0
-offset_bottom = 16.0
+offset_bottom = 19.0
 theme_override_constants/line_spacing = -5
 text = "Well you go it now dont ya?"
 visible_characters = 0
 visible_ratio = 0.0
 
 [node name="Panel" type="Panel" parent="DialogueText"]
+z_index = -5
 custom_minimum_size = Vector2(150, 75)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -55,6 +55,9 @@ func pop_all():
 	menu_stack.clear()
 	is_transitioning = false
 	finished.emit()
+	
+func size():
+	return menu_stack.size()
 
 func transition_in(menu_name: String):
 	if menus.has(menu_name):

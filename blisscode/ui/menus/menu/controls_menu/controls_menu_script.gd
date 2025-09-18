@@ -25,7 +25,9 @@ var input_actions = [
 	{"name": "aim_down", "display_name": "Aim Down"},
 	{"name": "pause", "display_name": "Pause"},
 	{"name": "take", "display_name": "Take/Interact"},
-	{"name": "rewind", "display_name": "Rewind"}
+	{"name": "rewind", "display_name": "Rewind"},
+	{"name": "inventory", "display_name": "Inventory"},
+	{"name": "character_sheet", "display_name": "Character Sheet"}
 ]
 
 var action_buttons: Array[ControlsInputButton] = []

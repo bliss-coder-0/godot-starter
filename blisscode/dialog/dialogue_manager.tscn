@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://gfr7x1g3y5nk"]
 
-[ext_resource type="Script" uid="uid://do87twa8jtcyt" path="res://blisscode/dialogue/dialogue_manager.gd" id="1_0sbts"]
-[ext_resource type="PackedScene" uid="uid://dkr5b11mpccfv" path="res://blisscode/dialogue/dialogue_bubble.tscn" id="2_3x8w5"]
+[ext_resource type="Script" uid="uid://do87twa8jtcyt" path="res://blisscode/dialog/dialogue_manager.gd" id="1_0sbts"]
+[ext_resource type="PackedScene" uid="uid://dkr5b11mpccfv" path="res://blisscode/dialog/dialogue_bubble.tscn" id="2_3x8w5"]
 
 [node name="DialogueManager" type="Node2D" node_paths=PackedStringArray("dialogue_bubble", "dialogue_bubble2")]
 script = ExtResource("1_0sbts")

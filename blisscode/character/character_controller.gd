@@ -325,13 +325,13 @@ func take_damage(amount: int):
 
 func item_pickup(item: Item, pos: Vector2):
 	if item is Currency:
-		inventory.add_gold(item.amount, pos)
+		inventory.add_gold(item)
 	elif item is Equipable:
 		equip(item, pos)
 	elif item is Consumable:
 		consume(item, pos)
 
-func consume(item: Item, pos: Vector2):
+func consume(item: Item, _pos: Vector2):
 	if item.consume_on_pickup:
 		if item.health > 0:
 			character_sheet.add_health(item.health)
@@ -340,13 +340,13 @@ func consume(item: Item, pos: Vector2):
 		if item.stamina > 0:
 			character_sheet.add_stamina(item.stamina)
 	else:
-		inventory.add(item.id, pos)
+		inventory.add(item)
 
-func equip(item: Item, pos: Vector2):
+func equip(item: Item, _pos: Vector2):
 	if item.equip_on_pickup:
 		equipment.equip(item, equipment.get_slot_type(item.slot))
 	else:
-		inventory.add(item, pos)
+		inventory.add(item)
 
 func attack_left_hand():
 	if cooldown_left_hand:

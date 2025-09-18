@@ -51,7 +51,7 @@ colors = PackedColorArray(0.983333, 1, 0, 1, 0.984314, 1, 0, 1)
 gradient = SubResource("Gradient_inhyd")
 width = 16
 
-[node name="CharacterPointsBar" type="Control" node_paths=PackedStringArray("character", "health_rect", "armor_rect", "mana_rect", "stamina_rect")]
+[node name="CharacterPointsBar" type="Control" node_paths=PackedStringArray("health_rect", "armor_rect", "mana_rect", "stamina_rect")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -10.0
@@ -59,7 +59,6 @@ offset_top = -18.0
 offset_right = 30.0
 offset_bottom = 22.0
 script = ExtResource("1_apcqt")
-character = NodePath("")
 health_rect = NodePath("Health")
 armor_rect = NodePath("Armor")
 mana_rect = NodePath("Mana")

@@ -7,6 +7,8 @@ extends Node
 @export_tool_button("Open User Folder", "Callable") var open_user_folder_action = open_user_folder
 @export_tool_button("Remove User Data", "Callable") var remove_user_data_action = remove_user_data
 
+signal paused_toggled(is_paused: bool)
+
 func open_user_folder():
 	var user_data_path = ProjectSettings.globalize_path("user://")
 	OS.shell_open(user_data_path)
@@ -29,19 +31,9 @@ func _ready():
 
 	print("GameManager ready")
 
-func _input(event: InputEvent) -> void:
-	if Engine.is_editor_hint():
-		return
-	if game_config.game_state == GameConfig.GAME_STATE.GAME_PLAY:
-		if event.is_action_pressed("pause"):
-			get_tree().paused = not get_tree().paused
-			if get_tree().paused:
-				GameUi.game_menus.menu_stack.push("PauseMenu")
-			else:
-				GameUi.game_menus.menu_stack.pop_all()
-	
 func set_custom_cursor():
-	Input.set_custom_mouse_cursor(user_config.custom_cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
+	if user_config.custom_cursor_texture:
+		Input.set_custom_mouse_cursor(user_config.custom_cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
 
 func set_audio_volumes():
 	AudioUtils.set_volume(0, user_config.master_volume)
@@ -82,3 +74,15 @@ func get_user_config() -> UserConfig:
 
 func get_game_config() -> GameConfig:
 	return game_config
+
+func pause():
+	get_tree().paused = true
+	paused_toggled.emit(true)
+
+func toggle_pause():
+	get_tree().paused = not get_tree().paused
+	paused_toggled.emit(get_tree().paused)
+
+func unpause():
+	get_tree().paused = false
+	paused_toggled.emit(get_tree().paused)
