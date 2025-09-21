@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cb1l7kt3hpgmp" path="res://blisscode/ui/menus/menu/controls_menu/controls_menu_script.gd" id="1_j7oww"]
 [ext_resource type="PackedScene" uid="uid://bxsuo25o46jh8" path="res://blisscode/ui/menus/menu/controls_menu/input_listener_overlay.tscn" id="2_8p5xu"]
 [ext_resource type="Script" uid="uid://chqodxm47k6c0" path="res://blisscode/ui/menus/menu/controls_menu/input_options_button.gd" id="3_ssh7p"]
-[ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://blisscode/ui/menus/menu/menu_back_button.gd" id="4_mdcsb"]
+[ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://blisscode/ui/menus/menu/buttons/menu_back_button.gd" id="4_mdcsb"]
 
 [sub_resource type="Animation" id="Animation_83v66"]
 length = 0.001

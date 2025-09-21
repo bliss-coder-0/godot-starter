@@ -2,6 +2,14 @@
 @abstract
 class_name Item extends Resource
 
+enum Rarity {
+	COMMON,
+	UNCOMMON,
+	RARE,
+	EPIC,
+	LEGENDARY
+}
+
 @export var package: String = ""
 @export var name: String = ""
 @export var description: String = ""
@@ -13,6 +21,7 @@ class_name Item extends Resource
 @export var frame: int
 @export var hframes: int = 1
 @export var vframes: int = 1
+@export var rarity: Rarity = Rarity.COMMON
 
 @export_tool_button("Copy Item From Data Store", "Callable") var copy_item_from_data_store_action = copy_item_from_data_store
 
@@ -39,6 +48,7 @@ func save():
 		"frame": frame,
 		"hframes": hframes,
 		"vframes": vframes,
+		"rarity": rarity,
 	}
 	return data
 
@@ -63,3 +73,5 @@ func restore(data):
 		hframes = data["hframes"]
 	if data.has("vframes"):
 		vframes = data["vframes"]
+	if data.has("rarity"):
+		rarity = data["rarity"]

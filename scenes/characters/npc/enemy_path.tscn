@@ -28,38 +28,13 @@ resource_local_to_scene = true
 script = ExtResource("2_w56a4")
 character_name = "Enemy 1"
 character_controller_type = 1
-race = 3
-class_type = 4
-alignment = 0.0
-level = 0
 health = 10
 max_health = 10
-armor = 0
-max_armor = 0
-mana = 0
-max_mana = 0
-stamina = 0
-max_stamina = 0
-special = 0
-max_special = 0
-xp = 0
-max_xp = 0
-strength = 0
-dexterity = 0
-constitution = 0
-intelligence = 0
-wisdom = 0
-charisma = 0
-attack = 0
 metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
 
 [sub_resource type="Resource" id="Resource_wwum6"]
 resource_local_to_scene = true
 script = ExtResource("3_3cwob")
-gold = 0
-max_gold = 10000
-max_slots = 50
-items = Array[ExtResource("3_cfvnr")]([])
 metadata/_custom_type_script = "uid://ej3t1d08m43w"
 
 [sub_resource type="Resource" id="Resource_lwmd7"]
@@ -201,7 +176,7 @@ nodes/PlayerStates/node = ExtResource("7_q5dgt")
 nodes/PlayerStates/position = Vector2(-200, 120)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_apbv3")
 nodes/TimeScale/position = Vector2(100, 120)
-node_connections = [&"TimeScale", 0, &"PlayerStates", &"output", 0, &"TimeScale"]
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"PlayerStates"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mm6pg"]
 radius = 202.022
@@ -249,10 +224,6 @@ parameters/TimeScale/scale = 2.0
 [node name="AIControls" type="Node" parent="." node_paths=PackedStringArray("blackboard")]
 script = ExtResource("5_ananl")
 blackboard = NodePath("../BTBlackboard")
-movement_type = 5
-aim_type = 5
-facing_type = 5
-attack_type = 5
 metadata/_custom_type_script = "uid://brschogihfiwm"
 
 [node name="BTBlackboard" type="Node" parent="."]
@@ -289,6 +260,7 @@ var_name = &"left_hand"
 
 [node name="BTFollowPathProcess" type="Node" parent="BTPlayer/BTSelectorNode/Wander"]
 script = ExtResource("22_yan2r")
+acquire_target = true
 metadata/_custom_type_script = "uid://b8x28spcn1q3a"
 
 [node name="Attack" type="Node" parent="BTPlayer/BTSelectorNode"]

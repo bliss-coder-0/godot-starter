@@ -1,14 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://y5i3jnb7xgkk"]
+[gd_scene load_steps=28 format=3 uid="uid://y5i3jnb7xgkk"]
 
 [ext_resource type="Script" uid="uid://cyhaw1qyjtrhn" path="res://blisscode/character/character_controller.gd" id="1_apbv3"]
-[ext_resource type="Script" uid="uid://bkcl7yhvmiokh" path="res://blisscode/character/character_sheet.gd" id="2_vmatd"]
-[ext_resource type="Script" uid="uid://drotf454prdmb" path="res://blisscode/item/item.gd" id="3_xokow"]
-[ext_resource type="Script" uid="uid://ej3t1d08m43w" path="res://blisscode/item/inventory.gd" id="4_po7bs"]
-[ext_resource type="Script" uid="uid://dx15io88tra7t" path="res://blisscode/item/ranged_weapon.gd" id="5_ohvsh"]
-[ext_resource type="Texture2D" uid="uid://djiv6d5fhe0c" path="res://assets/img/items/guns.png" id="6_5b8nr"]
-[ext_resource type="Script" uid="uid://dfarl1fr76j2f" path="res://blisscode/item/consumable.gd" id="6_67j34"]
-[ext_resource type="Script" uid="uid://cwaaqivnrog6d" path="res://blisscode/item/equipment.gd" id="7_67j34"]
-[ext_resource type="Texture2D" uid="uid://f8srq64xkcq4" path="res://assets/img/items/potions.png" id="7_wudon"]
+[ext_resource type="Resource" uid="uid://bgi1qs6ia38vb" path="res://data/resources/player/player_black_guy/player_black_guy_character_sheet.tres" id="2_apbv3"]
+[ext_resource type="Resource" uid="uid://d0pbk64gdnngy" path="res://data/resources/player/player_black_guy/player_black_guy_inventory.tres" id="3_apbv3"]
+[ext_resource type="Resource" uid="uid://cau4q2yakshlf" path="res://data/resources/player/player_black_guy/player_black_guy_equipment.tres" id="4_vmatd"]
+[ext_resource type="Resource" uid="uid://s2i3cyd4ucg5" path="res://data/resources/player/player_black_guy/player_black_guy_weapon_belt.tres" id="5_xokow"]
 [ext_resource type="Script" uid="uid://d2lsy2pdynjo3" path="res://blisscode/character/controls/player_controls.gd" id="9_6ns4p"]
 [ext_resource type="Texture2D" uid="uid://e17g67i56m21" path="res://assets/img/characters/black_guy/BlackGuy-3x3.png" id="10_apbv3"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bwp3hqywp4err" path="res://scenes/characters/player/animations/player_walk_states.tres" id="10_vmatd"]
@@ -20,96 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://bxqd1qybg36cl" path="res://assets/img/cursors/circle.png" id="15_qjkyd"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="16_2tdgv"]
 [ext_resource type="Texture2D" uid="uid://dl5ed1afrnnhn" path="res://assets/img/masks/LightMask.png" id="17_vmatd"]
-
-[sub_resource type="Resource" id="Resource_rpnd8"]
-resource_local_to_scene = true
-script = ExtResource("2_vmatd")
-character_name = "Player"
-alignment = -0.279
-health = 50
-max_health = 100
-armor = 100
-max_armor = 100
-mana = 100
-max_mana = 100
-stamina = 100
-max_stamina = 100
-special = 100
-max_special = 100
-metadata/_custom_type_script = "uid://bkcl7yhvmiokh"
-
-[sub_resource type="Resource" id="Resource_po7bs"]
-script = ExtResource("5_ohvsh")
-projectile = "projectile"
-max_ammo = 10
-unlimited_ammo = true
-spread = 10
-spread_angle = 0.05
-screen_shake_amount = 2.0
-damage_min = 10
-damage_max = 10
-attack_rate = 0.5
-slot = 9
-equip_on_pickup = true
-package = "guns"
-name = "black shotgun"
-texture = ExtResource("6_5b8nr")
-frame = 1
-hframes = 3
-metadata/_custom_type_script = "uid://dx15io88tra7t"
-
-[sub_resource type="Resource" id="Resource_6ns4p"]
-script = ExtResource("6_67j34")
-health = 50
-consume_on_pickup = true
-package = "potions"
-name = "red medium health potion"
-texture = ExtResource("7_wudon")
-frame = 1
-hframes = 3
-vframes = 2
-metadata/_custom_type_script = "uid://dfarl1fr76j2f"
-
-[sub_resource type="Resource" id="Resource_3wg1y"]
-resource_local_to_scene = true
-script = ExtResource("4_po7bs")
-gold = 50
-items = Array[ExtResource("3_xokow")]([SubResource("Resource_po7bs"), SubResource("Resource_6ns4p")])
-metadata/_custom_type_script = "uid://ej3t1d08m43w"
-
-[sub_resource type="Resource" id="Resource_o6auj"]
-script = ExtResource("5_ohvsh")
-projectile = "projectile"
-max_ammo = 10
-unlimited_ammo = true
-attack_rate = 0.1
-slot = 9
-package = "guns"
-name = "black pistol"
-texture = ExtResource("6_5b8nr")
-hframes = 3
-metadata/_custom_type_script = "uid://dx15io88tra7t"
-
-[sub_resource type="Resource" id="Resource_wqk1x"]
-script = ExtResource("5_ohvsh")
-projectile = "projectile_missle"
-max_ammo = 10
-unlimited_ammo = true
-attack_rate = 1.0
-slot = 9
-package = "guns"
-name = "black missle"
-texture = ExtResource("6_5b8nr")
-frame = 2
-hframes = 3
-metadata/_custom_type_script = "uid://dx15io88tra7t"
-
-[sub_resource type="Resource" id="Resource_kmyvj"]
-resource_local_to_scene = true
-script = ExtResource("7_67j34")
-left_hand = SubResource("Resource_o6auj")
-right_hand = SubResource("Resource_wqk1x")
-metadata/_custom_type_script = "uid://cwaaqivnrog6d"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wocps"]
 
@@ -250,33 +156,17 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"PlayerStates"
 collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_apbv3")
-character_sheet = SubResource("Resource_rpnd8")
-inventory = SubResource("Resource_3wg1y")
-equipment = SubResource("Resource_kmyvj")
+character_sheet = ExtResource("2_apbv3")
+inventory = ExtResource("3_apbv3")
+equipment = ExtResource("4_vmatd")
+weapon_belt = ExtResource("5_xokow")
 controls = NodePath("PlayerControls")
-speed = null
-walk_multiplier = null
-run_multiplier = null
-jump_force = null
-has_navigation = null
 allow_y_controls = true
-movement_percent = null
-movement_lerp = null
 gravity_percent = 0.0
-acceleration = null
-friction = null
-push_force = null
-knockback_force = null
-knockback_resistance = null
-max_velocity = null
-garbage = null
-garbage_time = null
-dash_time = null
-dash_speed_multiplier = null
-stop_on_end = null
 
 [node name="PlayerControls" type="Node" parent="." node_paths=PackedStringArray("aim_sprite", "touch_sprite")]
 script = ExtResource("9_6ns4p")
+handle_weapon_belt = null
 aim_sprite = NodePath("../Crosshairs")
 touch_sprite = NodePath("../TouchCircle")
 metadata/_custom_type_script = "uid://d2lsy2pdynjo3"

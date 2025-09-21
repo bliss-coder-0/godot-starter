@@ -138,3 +138,26 @@ func create_consumable(item_data, atlas):
 	consumable.restore(item_data)
 	fill_texture(consumable, item_data, atlas)
 	return consumable
+
+func create_quests() -> Dictionary:
+	if Engine.is_editor_hint():
+		_create_data_store()
+		
+	var store = get_store_by_path("quests")
+
+	if store == null:
+		print("Store not found: ", "quests")
+		return {}
+
+	var quests: Dictionary = {}
+	for key in store.keys():
+		var quest_data = store[key]
+		for qs in quest_data:
+			var quest = Quest.new()
+			quest.quest_group = key
+			quest.restore(qs)
+			if not quests.has(key):
+				quests[key] = []
+			quests[key].append(quest)
+
+	return quests

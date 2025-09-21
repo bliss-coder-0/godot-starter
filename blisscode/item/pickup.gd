@@ -34,7 +34,7 @@ func set_item(new_item: Item):
 	sprite.hframes = item.hframes
 	sprite.vframes = item.vframes
 	sprite.frame = item.frame
-	#sprite.material.set_shader_parameter("rarity", item.rarity)
+	sprite.material.set_shader_parameter("rarity", item.rarity)
 	
 func _on_interacted(body: CharacterController, pos: Vector2):
 	_pickup_handler(body, pos)

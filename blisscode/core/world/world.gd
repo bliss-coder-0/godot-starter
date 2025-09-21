@@ -16,6 +16,9 @@ func _after_ready():
 	
 	GameUi.hud.show_hud()
 	
+	NotifcationsToast.show_notification("Game Ready", "Ready to start the game!")
+	NotifcationsToast.show_notification("Aint no one got you on this", "Holy shit!!!")
+	
 func _restore_spwan():
 	UserDataStore.restore()
 	GameManager.game_config.set_state(GameConfig.GAME_STATE.GAME_PLAY)

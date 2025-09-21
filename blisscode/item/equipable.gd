@@ -2,14 +2,6 @@
 @abstract
 class_name Equipable extends Item
 
-enum Rarity {
-	COMMON,
-	UNCOMMON,
-	RARE,
-	EPIC,
-	LEGENDARY
-}
-
 enum EquipableSlotType {
 	None,
 	Helmet,
@@ -40,7 +32,6 @@ enum EquipableEffect {
 @export var durability: int = 0
 @export var sell_price: int = 0
 @export var buy_price: int = 0
-@export var rarity: Rarity = Rarity.COMMON
 @export var level_requirement: int = 0
 @export var slot: EquipableSlotType
 @export var equip_on_pickup: bool = false
@@ -94,7 +85,6 @@ func save():
 	data["durability"] = durability
 	data["sell_price"] = sell_price
 	data["buy_price"] = buy_price
-	data["rarity"] = rarity
 	data["level_requirement"] = level_requirement
 	data["slot"] = save_slot_type(slot)
 	data["equip_on_pickup"] = equip_on_pickup
@@ -111,8 +101,6 @@ func restore(data):
 		sell_price = data["sell_price"]
 	if data.has("buy_price"):
 		buy_price = data["buy_price"]
-	if data.has("rarity"):
-		rarity = data["rarity"]
 	if data.has("level_requirement"):
 		level_requirement = data["level_requirement"]
 	if data.has("slot"):

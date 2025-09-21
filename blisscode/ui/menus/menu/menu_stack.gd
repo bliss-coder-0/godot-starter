@@ -59,6 +59,9 @@ func pop_all():
 func size():
 	return menu_stack.size()
 
+func get_top():
+	return menu_stack.back()
+
 func transition_in(menu_name: String):
 	if menus.has(menu_name):
 		await menus[menu_name].transition_in()

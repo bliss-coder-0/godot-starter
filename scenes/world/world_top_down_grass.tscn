@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://phtelv84rkk2"]
+[gd_scene load_steps=25 format=4 uid="uid://phtelv84rkk2"]
 
 [ext_resource type="Script" uid="uid://bm85budamtxnd" path="res://blisscode/core/world/world.gd" id="1_sw1yw"]
 [ext_resource type="Script" uid="uid://be1sydgbkih6o" path="res://blisscode/room/rooms.gd" id="2_au4vk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://y2k6svdyl4md" path="res://blisscode/core/spawning/spawn_position.gd" id="4_o0q43"]
 [ext_resource type="Script" uid="uid://dawrnhrddu0kw" path="res://blisscode/core/world/world_door.gd" id="6_o0q43"]
 [ext_resource type="Script" uid="uid://ddlo01mfc118i" path="res://blisscode/core/spawning/spawner.gd" id="7_au4vk"]
+[ext_resource type="Script" uid="uid://baibi6vypqgi8" path="res://blisscode/core/spawning/player_spawner.gd" id="8_am3bl"]
 [ext_resource type="Script" uid="uid://cqwk88xhb2juy" path="res://blisscode/generation/room_filler.gd" id="9_n60aj"]
 [ext_resource type="PackedScene" uid="uid://c3sn1lvnaw1tp" path="res://scenes/items/pickups/pickup.tscn" id="9_sw1yw"]
 [ext_resource type="Script" uid="uid://dx15io88tra7t" path="res://blisscode/item/ranged_weapon.gd" id="10_am3bl"]
@@ -152,7 +153,7 @@ metadata/_custom_type_script = "uid://y2k6svdyl4md"
 
 [node name="PlayerSpawner" type="Node2D" parent="Rooms/Room1" node_paths=PackedStringArray("entity_container")]
 position = Vector2(358, 389)
-script = ExtResource("7_au4vk")
+script = ExtResource("8_am3bl")
 entity_name = "player"
 entity_container = NodePath("../../../EntityContainer")
 metadata/_custom_type_script = "uid://ddlo01mfc118i"

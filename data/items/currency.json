@@ -4,8 +4,8 @@
     "atlas": {
       "path": "res://assets/img/items/Coin-Sheet.png",
       "cell_size": 16,
-      "hframes": 8,
-      "vframes": 5
+      "hframes": 4,
+      "vframes": 1
     }
   },
   "items": [

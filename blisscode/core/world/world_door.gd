@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 func _on_body_entered(body):
 	if body is CharacterController:
-		SignalBus.world_changed.emit(goto_door_id, door_id, scene_path, scene_transition_name)
+		EventBus.world_changed.emit(goto_door_id, door_id, scene_path, scene_transition_name)
 
 func spawn_player():
 	if spawn_position:

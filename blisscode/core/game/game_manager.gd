@@ -20,8 +20,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	# Connect signals
-	SignalBus.audio_volume_changed.connect(_on_audio_volume_changed)
-	SignalBus.world_changed.connect(_on_world_changed)
+	EventBus.audio_volume_changed.connect(_on_audio_volume_changed)
+	EventBus.world_changed.connect(_on_world_changed)
 	
 	# Audio
 	set_audio_volumes()

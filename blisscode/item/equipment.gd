@@ -28,6 +28,7 @@ enum EquipmentSlotType {
 @export var right_hand: Equipable
 
 signal equipment_change
+
 							
 func equip(item: Item, equipment_slot_type: EquipmentSlotType):
 	match equipment_slot_type:

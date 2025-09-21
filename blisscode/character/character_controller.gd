@@ -9,6 +9,7 @@ class_name CharacterController extends CharacterBody2D
 @export var character_sheet: CharacterSheet
 @export var inventory: Inventory
 @export var equipment: Equipment
+@export var weapon_belt: WeaponBelt
 @export var controls: CharacterControls
 
 @export_group("Movement")
@@ -344,6 +345,7 @@ func consume(item: Item, _pos: Vector2):
 
 func equip(item: Item, _pos: Vector2):
 	if item.equip_on_pickup:
+		weapon_belt.set_next_belt_slot(item)
 		equipment.equip(item, equipment.get_slot_type(item.slot))
 	else:
 		inventory.add(item)

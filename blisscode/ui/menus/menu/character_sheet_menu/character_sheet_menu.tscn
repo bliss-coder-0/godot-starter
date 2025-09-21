@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8k2x7nan4p5q"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://blisscode/ui/menus/menu/character_sheet_menu/character_sheet_menu.gd" id="1_character_sheet"]
-[ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://blisscode/ui/menus/menu/menu_back_button.gd" id="2_back_button"]
+[ext_resource type="Script" uid="uid://b8k2x7nan4p5q" path="res://blisscode/ui/menus/menu/character_sheet_menu/character_sheet_menu.gd" id="1_character_sheet"]
+[ext_resource type="Script" uid="uid://jnyn4yy8houc" path="res://blisscode/ui/menus/menu/buttons/menu_back_button.gd" id="2_back_button"]
 
 [sub_resource type="Animation" id="Animation_83v66"]
 length = 0.001

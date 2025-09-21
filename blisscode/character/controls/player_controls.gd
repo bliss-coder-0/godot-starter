@@ -1,14 +1,13 @@
 @tool
 class_name PlayerControls extends CharacterControls
 
+@export var handle_weapon_belt: bool = true
 
 @export_group("Debug")
 @export var aim_sprite: Sprite2D
 @export var show_aim_sprite: bool = true
 @export var touch_sprite: Sprite2D
 @export var show_touch_sprite: bool = true
-
-
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -44,6 +43,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			touch_sprite.hide()
 			touch_sprite.global_position = touch_position
 		is_touching = false
+
+	if handle_weapon_belt:
+		# if 1 through 0 on the top keyboard then equip from weapon belt to left hand
+		# if left shift is held, equip to right hand instead
+		if event is InputEventKey and event.pressed and event.keycode >= 49 and event.keycode <= 57:
+			var slot_type = Equipment.EquipmentSlotType.LeftHand
+			if Input.is_action_pressed("run"):
+				slot_type = Equipment.EquipmentSlotType.RightHand
+			parent.equipment.equip(parent.weapon_belt.get_slot(event.keycode - 49), slot_type)
 		
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():

@@ -21,9 +21,13 @@ func _input(event: InputEvent) -> void:
 							GameManager.pause()
 						GameUi.game_menus.menu_stack.push(menu_name)
 				else:
-					if pause_game:
-						GameManager.unpause()
-					GameUi.game_menus.menu_stack.pop_all()
+					if GameUi.game_menus.menu_stack.size() > 0 and GameUi.game_menus.menu_stack.get_top() != menu_name:
+						await GameUi.game_menus.menu_stack.pop()
+						GameUi.game_menus.menu_stack.push(menu_name)
+					else:
+						if pause_game:
+							GameManager.unpause()
+						GameUi.game_menus.menu_stack.pop_all()
 
 func _ready():
 	_off()

@@ -11,7 +11,7 @@ signal started
 signal finished
 
 func _ready():
-	SignalBus.world_changed.connect(_on_world_changed)
+	EventBus.world_changed.connect(_on_world_changed)
 	var root = get_tree().root
 	current_scene = root.get_child(-1)
 	for child in get_children():

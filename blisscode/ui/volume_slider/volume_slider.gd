@@ -12,4 +12,4 @@ func _ready():
 	slider.set_value_no_signal(percent)
 
 func _on_h_slider_value_changed(value: float):
-	SignalBus.audio_volume_changed.emit(bus_idx, value)
+	EventBus.audio_volume_changed.emit(bus_idx, value)

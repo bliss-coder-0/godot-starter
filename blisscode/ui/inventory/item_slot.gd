@@ -1,28 +1,51 @@
 class_name ItemSlot extends Panel
 
+enum ItemSlotType
+{
+	Inventory,
+	Equipment,
+	WeaponBelt
+}
+
+enum DropSlotType
+{
+	All,
+	Equipment,
+	WeaponBelt
+}
+
 @onready var icon: TextureRect = $Icon
+
 @export var item: Item
+@export var item_slot_type: ItemSlotType = ItemSlotType.Inventory
+@export var can_drop_slot_type: DropSlotType = DropSlotType.All
+@export var equipment_slot: Equipment.EquipmentSlotType
+@export var index: int
 
-var slot_index: int
-
-signal item_dropped(i: Item, from_index: int, to_index: int)
+var player: CharacterController
 
 func _ready() -> void:
-	update_ui()
+	EventBus.player_spawned.connect(_on_player_spawned)
+
+func _on_player_spawned(p: CharacterController):
+	player = p
+	_update_ui()
 
 func _process(_delta: float) -> void:
 	if Input.get_current_cursor_shape() == CURSOR_FORBIDDEN:
 		DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 
-func set_item(i: Item, index: int):
+func set_item(i: Item):
 	item = i
-	slot_index = index
-	update_ui()
+	_update_ui()
 
 func get_item():
 	return item
 
-func update_ui() -> void:
+func set_index(i: int):
+	index = i
+
+func _update_ui() -> void:
 	if not item:
 		icon.texture = null
 		return
@@ -62,24 +85,35 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	preview.position -= Vector2(size.x / 2, size.y / 2)
 	preview.self_modulate = Color.TRANSPARENT
 	c.modulate = Color(c.modulate, 0.5)
-	c.scale = Vector2(2.0, 2.0)
 	
 	set_drag_preview(c)
 	icon.hide()
 	return self
 
-func _can_drop_data(_at_position: Vector2, _data: Variant) -> bool:
-	return true
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
+	if can_drop_slot_type == DropSlotType.All:
+		return true
+	if can_drop_slot_type == DropSlotType.Equipment:
+		if data.item is Equipable and data.item.slot == equipment_slot:
+			return true
+	if can_drop_slot_type == DropSlotType.WeaponBelt:
+		if data.item is Weapon:
+			return true
+	return false
 	
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
+	if data.item_slot_type == ItemSlotType.Inventory:
+		if item_slot_type == ItemSlotType.Inventory:
+			player.inventory.swap_slots(data.index, index)
+			
 	var tmp = item
 	item = data.item
 	data.item = tmp
 	icon.show()
 	data.show()
-	update_ui()
-	data.update_ui()
-	item_dropped.emit(item, data.slot_index, slot_index)
+	_update_ui()
+	data._update_ui()
+	
 
 var data_bk
 func _notification(what: int) -> void:
